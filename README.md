@@ -1,2 +1,3 @@
-# windows-client-HPC
-Documentation on how to use Windows 10 as a client system for HPC clusters.
+# Windows as a client system for HPC clusters
+
+This work-in-progress repository contains a lot of information on how Windows 10 can be used as an ideal client for HPC clusters.
