@@ -1,0 +1,39 @@
+site_name: "Using Windows as a client for HPC systems"
+site_url: https://klust.github.io/windows-client-HPC
+theme:
+  name: material
+  features:
+      - instant
+repo_name: EasyBuild @ GitHub
+repo_url: https://github.com/klust/windows-client-HPC
+edit_uri: windows-client-HPC/edit/master/docs
+nav:
+  - Home: index.md
+plugins:
+  # show revision date at bottom of each page
+  - git-revision-date-localized
+  # necessary for search to work
+  - search
+markdown_extensions:
+  # notes, warnings, hints, ...
+  - admonition
+  # code blocks with syntax highlighting, graphs
+  - pymdownx.superfences:
+        custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  # clickable details
+  - pymdownx.details
+  # tabbed contents
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+extra:
+  # add links in bottom right
+  social:
+    - type: github
+      icon: octicons/logo-github
+      link: https://github.com/klust
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UC3szWMS7glcfWsEZTZXQ1oQ
