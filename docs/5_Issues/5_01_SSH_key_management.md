@@ -1,5 +1,7 @@
 # SSH key management
 
+## Using the Windows SSH agent
+
 Windows does come with a ssh key agent service. However, in recent
 versions of Windows 10, it is disabled by default. To enable it,
 
@@ -34,32 +36,23 @@ Solutions:
     .bash_profile as that is the typical place to set environment
     variables):
 
-+-----------------------------------------------------------------------+
-| export SSH_AUTH_SOCK=/home/\$USER/agent.sock.\$WSL_DISTRO_NAME        |
-|                                                                       |
-| ss -a \| grep -q \$SSH_AUTH_SOCK                                      |
-|                                                                       |
-| if \[ \$? -ne 0 \]; then                                              |
-|                                                                       |
-| rm -f \$SSH_AUTH_SOCK                                                 |
-|                                                                       |
-| ( setsid socat UNIX-LISTEN:\$SSH_AUTH_SOCK,fork                       |
-| EXEC:\"\$HOME/winhome/.wsl/npiperelay.exe -ei -s                      |
-| //./pipe/openssh-ssh-agent\",nofork & ) \>/dev/null 2\>&1             |
-|                                                                       |
-| fi                                                                    |
-+=======================================================================+
-+-----------------------------------------------------------------------+
+``` bash
+export SSH_AUTH_SOCK=/home/$USER/.agent.sock.$WSL_DISTRO_NAME
+ss -a | grep -q $SSH_AUTH_SOCK
+if [ $? -ne 0   ]; then
+    rm -f $SSH_AUTH_SOCK
+    ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"$HOME/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+fi
+```
 
-(note that lines 5, 6 and 7 should in fact be a single line in your
-.bash_profile). There are a few caveats:
+There are a few caveats:
 
--   SSH_AUTH_SOCK points to the socket that will be used to communicate
+-   `SSH_AUTH_SOCK` points to the socket that will be used to communicate
     with the ssh agent. In most WSL distributions, this should be on an
     internal Linux file system. So in case you use your Windows home
     directory also as the home directory in your WSL distribution, you
-    should not put the socket there. This is why /home/\$USER is used
-    rather than \$HOME. Also, if you have multiple Linux distributions
+    should not put the socket there. This is why `/home/$USER` is used
+    rather than `$HOME`. Also, if you have multiple Linux distributions
     in WSL, it is important that the socket has a different name for
     each distribution as otherwise one distribution will try to talk to
     a socket in a different distribution. At first this may seem
@@ -69,39 +62,29 @@ Solutions:
 -   The second line tests if there is already an socat process managing
     that socket.
 
--   The crucial line is the setid socat line:
+-   The crucial line is the `setsid socat` line:
 
-    -   The Windows ssh agent works with Windows named pipes, and WSL
+    -   The Windows ssh agent works with Windows named pipes, and WSL2
         programs cannot directly talk to those. This is where
-        npiperelay.exe comes in. It acts as the translator between Linux
+        `npiperelay.exe` comes in. It acts as the translator between Linux
         sockets and the Windows named pipe.
 
-    -   The socat process listens at the Linux site. Whenever ssh
-        contacts the socket, it starts npiperelay.exe to talk to the
-        Windows named pipe. The npiperelay.exe process is started with
+    -   The `socat` process listens at the Linux site. Whenever ssh
+        contacts the socket, it starts `npiperelay.exe` to talk to the
+        Windows named pipe. The `npiperelay.exe` process is started with
         options that will terminate it after the command from the ssh
         process.
 
-    -   The path specified for the npiperelay.exe command is the path as
+    -   The path specified for the `npiperelay.exe` command is the path as
         seen by the Linux distribution.
 
-    -   The setsid command is used to start it in a separate session so
+    -   The `setsid` command is used to start it in a separate session so
         that it continues running if the current Linux session is
         terminated, to be picked up again when you start a new shell in
         that distribution.
 
 At the moment of writing, this process was tested and works in Fedora
-35, OpenSUSE 15 SP3 and Ubuntu 20.4.3 LTS. However, Ubuntu 20.4 has a
-different problem that even seems to occur running the regular ssh-agent
-as soon as an IdentityFile line with IdentitiesOnly is added to the
-.ssh/config file for the host and the key that is used there is a
-symbolic link to the actual key. And this in turn seems to be related to
-a permissions problem in WSL when using a Windows file system: It is not
-possible to set the permissions on the links themselves to 700 while
-that seems to be needed for the Ubuntu ssh client (according to a web
-search on possible causes). In general, the mapping between users and
-groups on the WSL side and on the Windows side seems to differ between
-distributions and can be the cause of problems.
+35, OpenSUSE 15 SP3 and Ubuntu 20.4.3 LTS. 
 
 Some good sources of information on this procedure:
 
@@ -118,3 +101,16 @@ Some good sources of information on this procedure:
     markramige.com](https://markramige.com/posts/using-ssh-on-windows-10-and-wsl-2/)
     is a page that explains the whole process of setting up the Windows
     OpenSSH implementation and integrating it with WSL.
+
+## Key permissions-related problems
+
+Ubuntu 20.4 has problems using key files symlinked on a regular Windows
+file system. It shows when an IdentityFile line with IdentitiesOnly is added to the
+`.ssh/config` file for the host and the key that is used there is a
+symbolic link to the actual key. And this in turn seems to be related to
+a permissions problem in WSL2 when using a Windows file system: It is not
+possible to set the permissions on the links themselves to 700 while
+that seems to be needed for the Ubuntu ssh client (according to a web
+search on possible causes). In general, the mapping between users and
+groups on the WSL2 side and on the Windows side seems to differ between
+distributions and can be the cause of problems.
