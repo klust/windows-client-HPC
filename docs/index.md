@@ -1,7 +1,7 @@
 # Using Windows as a client and development platform for HPC
 
 -   [Introduction](0_00_introduction)
--   [Protocols and technolgoeis](1_ProtocolsTechnologies/index.md.md)
+-   [Protocols and technolgoeis](1_ProtocolsTechnologies/index.md)
     -   [SSH](1_ProtocolsTechnologies/1_01_SSH.md)
     -   [Remote graphics](1_ProtocolsTechnologies/1_02_Remote_graphics.md)
     -   [Globus and GridFTP for file transfer](1_ProtocolsTechnologies/1_03_Globus.md)

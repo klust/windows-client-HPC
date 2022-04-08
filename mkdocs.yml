@@ -32,6 +32,7 @@ nav:
     - VNC clients: 2_Software/2_05_VNC.md
     - NX clients: 2_Software/2_06_NX.md
   - Creating a Linux-like environment on Windows:
+    - 3_LinuxOnWin/index.md
     - WSL and WSL2: 3_LinuxOnWin/3_01_WSL.md
     - CygWin: 3_LinuxOnWin/3_02_CygWin.md
   - Cluster software stack on Windows: 4_EESSI/index.md
