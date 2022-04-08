@@ -714,16 +714,14 @@ you are using. One problem is that if you are using WSL2, you need to
 ensure access from the virtual interface of the WSL2 virtual machine,
 which is in the 172.16.0.0/12 range (or maybe even always in the
 172.31.0.0/16 range).</p>
-<p>An easy way to limit the access is via the xhost command, which you
+<p>An easy way to limit the access is via the <code>xhost</code> command, which you
 would need to install in your Linux distribution. On the machine on
 which we tested we found the following to work from CygWin and three
 different Linux distributions (Fedora, openSUSE and Ubuntu):</p>
-<hr />
-<p>xhost +\$HOSTNAME.mshome.net +localhost -</p>
-<hr />
-<hr />
-<p>The "+\$HOSTNAME.mshome.net" grants access to the virtual interface of
-the WSL2 virtual machine (and is not needed on WSL 1), the "+localhost"
+<div class="highlight"><pre><span></span><code>xhost +<span class="nv">$HOSTNAME</span>.mshome.net +localhost -
+</code></pre></div>
+<p>The "<code>+$HOSTNAME.mshome.net</code>" grants access to the virtual interface of
+the WSL2 virtual machine (and is not needed on WSL1), the "+localhost"
 grants access to local X11 programs (important for CygWin and WSL1) and
 the "-" denies access to everyone else.</p>
 

@@ -617,9 +617,47 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SSH key management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         SSH key management
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-windows-ssh-agent" class="md-nav__link">
+    Using the Windows SSH agent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-permissions-related-problems" class="md-nav__link">
+    Key permissions-related problems
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -694,6 +732,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-windows-ssh-agent" class="md-nav__link">
+    Using the Windows SSH agent
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-permissions-related-problems" class="md-nav__link">
+    Key permissions-related problems
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -707,6 +767,7 @@
 
 
 <h1 id="ssh-key-management">SSH key management<a class="headerlink" href="#ssh-key-management" title="Permanent link">&para;</a></h1>
+<h2 id="using-the-windows-ssh-agent">Using the Windows SSH agent<a class="headerlink" href="#using-the-windows-ssh-agent" title="Permanent link">&para;</a></h2>
 <p>Windows does come with a ssh key agent service. However, in recent
 versions of Windows 10, it is disabled by default. To enable it,</p>
 <ol>
@@ -748,32 +809,22 @@ Solutions:</p>
     variables):</p>
 </li>
 </ul>
-<p>+-----------------------------------------------------------------------+
-| export SSH_AUTH_SOCK=/home/\$USER/agent.sock.\$WSL_DISTRO_NAME        |
-|                                                                       |
-| ss -a | grep -q \$SSH_AUTH_SOCK                                      |
-|                                                                       |
-| if [ \$? -ne 0 ]; then                                              |
-|                                                                       |
-| rm -f \$SSH_AUTH_SOCK                                                 |
-|                                                                       |
-| ( setsid socat UNIX-LISTEN:\$SSH_AUTH_SOCK,fork                       |
-| EXEC:\"\$HOME/winhome/.wsl/npiperelay.exe -ei -s                      |
-| //./pipe/openssh-ssh-agent\",nofork &amp; ) >/dev/null 2>&amp;1             |
-|                                                                       |
-| fi                                                                    |
-+=======================================================================+
-+-----------------------------------------------------------------------+</p>
-<p>(note that lines 5, 6 and 7 should in fact be a single line in your
-.bash_profile). There are a few caveats:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span>/home/<span class="nv">$USER</span>/.agent.sock.<span class="nv">$WSL_DISTRO_NAME</span>
+ss -a <span class="p">|</span> grep -q <span class="nv">$SSH_AUTH_SOCK</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span>   <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    rm -f <span class="nv">$SSH_AUTH_SOCK</span>
+    <span class="o">(</span> setsid socat UNIX-LISTEN:<span class="nv">$SSH_AUTH_SOCK</span>,fork EXEC:<span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent&quot;</span>,nofork <span class="p">&amp;</span> <span class="o">)</span> &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div>
+<p>There are a few caveats:</p>
 <ul>
 <li>
-<p>SSH_AUTH_SOCK points to the socket that will be used to communicate
+<p><code>SSH_AUTH_SOCK</code> points to the socket that will be used to communicate
     with the ssh agent. In most WSL distributions, this should be on an
     internal Linux file system. So in case you use your Windows home
     directory also as the home directory in your WSL distribution, you
-    should not put the socket there. This is why /home/\$USER is used
-    rather than \$HOME. Also, if you have multiple Linux distributions
+    should not put the socket there. This is why <code>/home/$USER</code> is used
+    rather than <code>$HOME</code>. Also, if you have multiple Linux distributions
     in WSL, it is important that the socket has a different name for
     each distribution as otherwise one distribution will try to talk to
     a socket in a different distribution. At first this may seem
@@ -785,27 +836,27 @@ Solutions:</p>
     that socket.</p>
 </li>
 <li>
-<p>The crucial line is the setid socat line:</p>
+<p>The crucial line is the <code>setsid socat</code> line:</p>
 <ul>
 <li>
-<p>The Windows ssh agent works with Windows named pipes, and WSL
+<p>The Windows ssh agent works with Windows named pipes, and WSL2
     programs cannot directly talk to those. This is where
-    npiperelay.exe comes in. It acts as the translator between Linux
+    <code>npiperelay.exe</code> comes in. It acts as the translator between Linux
     sockets and the Windows named pipe.</p>
 </li>
 <li>
-<p>The socat process listens at the Linux site. Whenever ssh
-    contacts the socket, it starts npiperelay.exe to talk to the
-    Windows named pipe. The npiperelay.exe process is started with
+<p>The <code>socat</code> process listens at the Linux site. Whenever ssh
+    contacts the socket, it starts <code>npiperelay.exe</code> to talk to the
+    Windows named pipe. The <code>npiperelay.exe</code> process is started with
     options that will terminate it after the command from the ssh
     process.</p>
 </li>
 <li>
-<p>The path specified for the npiperelay.exe command is the path as
+<p>The path specified for the <code>npiperelay.exe</code> command is the path as
     seen by the Linux distribution.</p>
 </li>
 <li>
-<p>The setsid command is used to start it in a separate session so
+<p>The <code>setsid</code> command is used to start it in a separate session so
     that it continues running if the current Linux session is
     terminated, to be picked up again when you start a new shell in
     that distribution.</p>
@@ -814,17 +865,7 @@ Solutions:</p>
 </li>
 </ul>
 <p>At the moment of writing, this process was tested and works in Fedora
-35, OpenSUSE 15 SP3 and Ubuntu 20.4.3 LTS. However, Ubuntu 20.4 has a
-different problem that even seems to occur running the regular ssh-agent
-as soon as an IdentityFile line with IdentitiesOnly is added to the
-.ssh/config file for the host and the key that is used there is a
-symbolic link to the actual key. And this in turn seems to be related to
-a permissions problem in WSL when using a Windows file system: It is not
-possible to set the permissions on the links themselves to 700 while
-that seems to be needed for the Ubuntu ssh client (according to a web
-search on possible causes). In general, the mapping between users and
-groups on the WSL side and on the Windows side seems to differ between
-distributions and can be the cause of problems.</p>
+35, OpenSUSE 15 SP3 and Ubuntu 20.4.3 LTS. </p>
 <p>Some good sources of information on this procedure:</p>
 <ul>
 <li>
@@ -845,6 +886,17 @@ distributions and can be the cause of problems.</p>
     OpenSSH implementation and integrating it with WSL.</p>
 </li>
 </ul>
+<h2 id="key-permissions-related-problems">Key permissions-related problems<a class="headerlink" href="#key-permissions-related-problems" title="Permanent link">&para;</a></h2>
+<p>Ubuntu 20.4 has problems using key files symlinked on a regular Windows
+file system. It shows when an IdentityFile line with IdentitiesOnly is added to the
+<code>.ssh/config</code> file for the host and the key that is used there is a
+symbolic link to the actual key. And this in turn seems to be related to
+a permissions problem in WSL2 when using a Windows file system: It is not
+possible to set the permissions on the links themselves to 700 while
+that seems to be needed for the Ubuntu ssh client (according to a web
+search on possible causes). In general, the mapping between users and
+groups on the WSL2 side and on the Windows side seems to differ between
+distributions and can be the cause of problems.</p>
 
   <hr>
 <div class="md-source-file">
