@@ -1,20 +1,54 @@
 site_name: "Using Windows as a client for HPC systems"
 site_url: https://klust.github.io/windows-client-HPC
+site_dir: "site/windows-client-HPC"
+
 theme:
   name: material
   features:
-      - instant
-repo_name: EasyBuild @ GitHub
-repo_url: https://github.com/klust/windows-client-HPC
-edit_uri: windows-client-HPC/edit/master/docs
+    - navigation.instant
+    - navigation.tracking
+    #- navigation.tabs
+    - navigation.top
+    - navigation.indexes
+    - header.autohide
+    - toc.follow
+  palette:
+    - primary: black
+
 nav:
   - Home: index.md
   - Introduction: 0_00_introduction.md
+  - Protocols and technologies:
+    - 1_ProtocolsTechnologies/index.md
+    - SSH: 1_ProtocolsTechnologies/1_01_SSH.md
+    - Remote graphics: 1_ProtocolsTechnologies/1_02_Remote_graphics.md
+    - Globus and GridFTP for file transfer: 1_ProtocolsTechnologies/1_03_Globus.md
+  - Software:
+    - 2_Software/index.md
+    - All-in-one: 2_Software/2_01_allInOne.md
+    - CLI via SSH: 2_Software/2_02_CLI_SSH.md
+    - SFTP file transfer: 2_Software/2_03_SFTP.md
+    - X server: 2_Software/2_04_Xserver.md
+    - VNC clients: 2_Software/2_05_VNC.md
+    - NX clients: 2_Software/2_06_NX.md
+  - Creating a Linux-like environment on Windows:
+    - WSL and WSL2: 3_LinuxOnWin/3_01_WSL.md
+    - CygWin: 3_LinuxOnWin/3_02_CygWin.md
+  - Cluster software stack on Windows: 4_EESSI/index.md
+  - Issues:
+    - 5_Issues/index.md
+    - SSH key management: 5_Issues/5_01_SSH_key_management.md
+    - Connecting to an X server in the Windows process space: 5_Issues/5_02_Connecting_WinX.md
+    - Securing an X server in the Windows process space: 5_Issues/5_03_SecureX.md
+    - Mapping users and groups between the Windows and WSL space: 5_Issues/5_04_Mapping_users.md
+
+
 plugins:
   # show revision date at bottom of each page
   - git-revision-date-localized
   # necessary for search to work
   - search
+
 markdown_extensions:
   # notes, warnings, hints, ...
   - admonition
@@ -30,6 +64,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - toc:
       permalink: true
+
 extra:
   # add links in bottom right
   social:
