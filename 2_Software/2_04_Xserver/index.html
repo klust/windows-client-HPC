@@ -723,14 +723,19 @@
 
 
 <h1 id="x-servers">X servers<a class="headerlink" href="#x-servers" title="Permanent link">&para;</a></h1>
-<p>This section is only relevant if you use Windows 10 as Windows 11
-contains support for X in WSL (dubbed WSLg). Windows 11 will render the
+<div class="admonition note">
+<p class="admonition-title">Relevance</p>
+<p>This section is only relevant if you want to use an X server outside
+of the WSL environment, e.g., on a system where you only use CygWin
+as a Unix/Linux emulation layer and want to avoid the use of WSL. </p>
+<p>Since late November the Microsoft store version of WSL is available.
+This is a version of WSL2 that contains built-in support for WSL
+(dubbed WSLg). Windows 11 will render the
 image in the Linux server and push the image to the Windows screen via
 the Remote Display Protocol, but also include features to support OpenGL
 acceleration on the graphics card if a compatible Windows display driver
-is used. However, you can still use an X server running in the Windows
-space of course, especially if you want to avoid using WSL, and in that
-case the text below is still relevant.</p>
+is used. </p>
+</div>
 <p>In the past, there were several commercial X servers that offered much
 better performance than the freely available ones. These however have
 lost popularity, especially when the server running the X applications
@@ -876,7 +881,7 @@ products.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 8, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 28, 2022</span>
       
     
   </small>
