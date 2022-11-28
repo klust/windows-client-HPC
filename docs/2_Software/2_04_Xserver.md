@@ -1,13 +1,17 @@
 # X servers
 
-This section is only relevant if you use Windows 10 as Windows 11
-contains support for X in WSL (dubbed WSLg). Windows 11 will render the
-image in the Linux server and push the image to the Windows screen via
-the Remote Display Protocol, but also include features to support OpenGL
-acceleration on the graphics card if a compatible Windows display driver
-is used. However, you can still use an X server running in the Windows
-space of course, especially if you want to avoid using WSL, and in that
-case the text below is still relevant.
+!!! note "Relevance"
+    This section is only relevant if you want to use an X server outside
+    of the WSL environment, e.g., on a system where you only use CygWin
+    as a Unix/Linux emulation layer and want to avoid the use of WSL. 
+
+    Since late November the Microsoft store version of WSL is available.
+    This is a version of WSL2 that contains built-in support for WSL
+    (dubbed WSLg). Windows 11 will render the
+    image in the Linux server and push the image to the Windows screen via
+    the Remote Display Protocol, but also include features to support OpenGL
+    acceleration on the graphics card if a compatible Windows display driver
+    is used. 
 
 In the past, there were several commercial X servers that offered much
 better performance than the freely available ones. These however have
