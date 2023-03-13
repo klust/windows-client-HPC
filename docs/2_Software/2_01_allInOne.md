@@ -22,3 +22,11 @@ other ways to run remote graphics.
     less complete as MobaXTerm and requires external packages to work.
     It essentially combines the PuTTY/KiTTY ssh/terminal emulator,
     WinSCP file transfer tool and VcXsrv X server.
+
+-   [XMANAGER POWER SUITE](https://www.netsarang.com/en/xmanager/) and its subpackages
+    [XSHELL](https://www.netsarang.com/en/xshell/) for ssh and 
+    [XFTP](https://www.netsarang.com/en/xftp/) for sftp and
+    [XMANAGER](https://www.netsarang.com/en/xmanager/) for X.
+    It is not clear how integrated the suite is or if these should more be considered
+    as separate applications with bundle pricing. It is also a rather pricey package.
+
