@@ -84,7 +84,10 @@ There are a few caveats:
         that distribution.
 
 At the moment of writing, this process was tested and works in Fedora
-35, OpenSUSE 15 SP3 and Ubuntu 20.4.3 LTS. 
+37 and OpenSUSE 15 SP4 but there are problems with Ubuntu 22.4.2 LTS. 
+Even though the ssh agent can be contacted (as `ssh-add -l` shows),
+it looks like ssh does not accept the data it gets from the ssh agent
+on Ubuntu.
 
 Some good sources of information on this procedure:
 
@@ -104,7 +107,7 @@ Some good sources of information on this procedure:
 
 ## Key permissions-related problems
 
-Ubuntu 20.4 has problems using key files symlinked on a regular Windows
+Ubuntu 20.4 and 22.4 have problems using key files symlinked on a regular Windows
 file system. It shows when an IdentityFile line with IdentitiesOnly is added to the
 `.ssh/config` file for the host and the key that is used there is a
 symbolic link to the actual key. And this in turn seems to be related to
@@ -114,3 +117,18 @@ that seems to be needed for the Ubuntu ssh client (according to a web
 search on possible causes). In general, the mapping between users and
 groups on the WSL2 side and on the Windows side seems to differ between
 distributions and can be the cause of problems.
+
+<!--
+Note: Tried to fix problems on Ubuntu:
+
+-   `ssh-add -l`  works so the agent can be contacted, but for some reason the 
+    passphrases are not accepted.
+-   Avoid links for keys: No difference.
+-   Change rights on the socket in /home/kurtl: No difference.
+
+From https://pscheit.medium.com/use-an-ssh-agent-in-wsl-with-your-ssh-setup-in-windows-10-41756755993e: 
+
+sudo rm -rf /tmp/ssh-agent-pipe
+sudo socat UNIX-LISTEN:/tmp/ssh-agent-pipe,fork,group=kurtl,umask=007 EXEC:”$HOME/.wsl/npiperelay.exe -ep -s //./pipe/openssh-ssh-agent”,nofork &
+export SSH_AUTH_SOCK=”/tmp/ssh-agent-pipe”
+-->
