@@ -84,10 +84,13 @@ There are a few caveats:
         that distribution.
 
 At the moment of writing, this process was tested and works in Fedora
-37 and OpenSUSE 15 SP4 but there are problems with Ubuntu 22.4.2 LTS. 
-Even though the ssh agent can be contacted (as `ssh-add -l` shows),
-it looks like ssh does not accept the data it gets from the ssh agent
-on Ubuntu.
+38, OpenSUSE 15 SP4 and Ubuntu 22.4.2 LTS. 
+It does require updating the ssh-agent in Windows though which was easy to do 
+[with a beta version](https://github.com/PowerShell/Win32-OpenSSH/releases/) 
+as MSI packages are available. I did find a download site with release
+versions also but lost the link and it only contained compressed archives
+containing a PowerShell script to install that needed to be run in a special
+way to work properly.
 
 Some good sources of information on this procedure:
 
