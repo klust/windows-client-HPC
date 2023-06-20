@@ -877,7 +877,7 @@ the server and on a mounted volume simultaneously will lead to unpredictable res
 <p>On Linux, where it was first introduced, sshfs is a userspace file system. So one needs
 tp first install a piece of software called <a href="https://www.kernel.org/doc/html/next/filesystems/fuse.html">FUSE</a>
 to support user space file systems, and then the software that provides sshfs. 
-Implementations on other file systems often follow a similar approach.</p>
+Implementations on other operating systems often follow a similar approach.</p>
 <h2 id="in-windows-and-therefore-cygwin">In Windows (and therefore CygWin)<a class="headerlink" href="#in-windows-and-therefore-cygwin" title="Permanent link">&para;</a></h2>
 <h3 id="sshfs-win">SSHFS-Win<a class="headerlink" href="#sshfs-win" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/winfsp/sshfs-win">SSHFS-Win</a> follows the same approach as the Linux implementation.</p>
@@ -901,10 +901,6 @@ which supports multiple operating systems and several user space file systems.</
 <li><a href="https://github.com/winfsp/sshfs-win">sshfs-win on GitHub</a></li>
 </ul>
 </details>
-<p>Note that there used to be another similar project known as <a href="https://github.com/feo-cz/win-sshfs">sshfs-win</a>
-or previously Dokan, but that hasn't seen any recent activity.
-Even though it still supports Windows 10 it is not advised to still use it as it is very likely the
-package has unfixed security issues, or may not even work correctly with some recent ssh servers.</p>
 <h3 id="dokan">Dokan<a class="headerlink" href="#dokan" title="Permanent link">&para;</a></h3>
 <p><a href="http://dokan-dev.github.io/">Dokan</a> (GitHub: <a href="https://github.com/dokan-dev">dokan-dev</a>) is a similar
 project to SSHFS-Win that offers a FUSE wrapper and several userspace file systems running on top of it.
@@ -916,7 +912,15 @@ now seems to be dying again.</p>
 <p>Next <a href="https://github.com/dokan-dev/dokan-sshfs">dokan-sshfs</a> can be installed.
 At the time of writing there don't seem to be pre-built packages available.</p>
 <h3 id="commercial-implementations">Commercial implementations<a class="headerlink" href="#commercial-implementations" title="Permanent link">&para;</a></h3>
+<p>This list by no means aims to be complete.</p>
 <ul>
+<li>
+<p><a href="https://mountainduck.io/">Mountain Duck</a> is a package from the developers of
+    CyberDuck that supports not only the sftp protocol (on which sshfs implementations
+    are based) but also several cloud storage technologies, including S3. Contrary to
+    CyberDuck it also allows to mount volumes and claims to use smart synchronization
+    that also enables offline work. It supports both Windows and macOS.</p>
+</li>
 <li>
 <p><a href="https://www.netdrive.net/">NetDrive</a> is a commercial package for Windows and macOS that does not
     only support SSHFS but can also mount several other types of cloud storage as if it is a local file
@@ -929,7 +933,11 @@ At the time of writing there don't seem to be pre-built packages available.</p>
     solutions and supports not only Windows and macOS but even some Linux versions.</p>
 </li>
 <li>
-<p><a href="https://www.nsoftware.com/sftpdrive/">nsoftware SFTP Drive</a> also supports Windows, macOS and Linux.</p>
+<p><a href="https://www.nsoftware.com/sftpdrive/">/n software SFTP Drive</a> also supports Windows, macOS and Linux.</p>
+</li>
+<li>
+<p><a href="https://cloudmounter.net/mount-cloud-drive-win.html">CloudMounter</a> is another package enabling mounting from an
+    sftp server, and it too supports some other cloud storage technologies. It also exists in a version for macOS.</p>
 </li>
 </ul>
 <h2 id="in-wsl">In WSL<a class="headerlink" href="#in-wsl" title="Permanent link">&para;</a></h2>
