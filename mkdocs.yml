@@ -23,19 +23,19 @@ nav:
     - SSH: 1_ProtocolsTechnologies/1_01_SSH.md
     - Remote graphics: 1_ProtocolsTechnologies/1_02_Remote_graphics.md
     - Globus and GridFTP for file transfer: 1_ProtocolsTechnologies/1_03_Globus.md
-  - Software:
-    - 2_Software/index.md
-    - All-in-one: 2_Software/2_01_allInOne.md
-    - CLI via SSH: 2_Software/2_02_CLI_SSH.md
-    - SFTP file transfer: 2_Software/2_03_SFTP.md
-    - SSHFS file access: 2_Software/2_04_SSHFS.md
-    - X server: 2_Software/2_05_Xserver.md
-    - VNC clients: 2_Software/2_06_VNC.md
-    - NX clients: 2_Software/2_07_NX.md
   - Creating a Linux-like environment on Windows:
-    - 3_LinuxOnWin/index.md
-    - WSL and WSL2: 3_LinuxOnWin/3_01_WSL.md
-    - CygWin: 3_LinuxOnWin/3_02_CygWin.md
+    - 2_LinuxOnWin/index.md
+    - WSL and WSL2: 2_LinuxOnWin/2_01_WSL.md
+    - CygWin: 2_LinuxOnWin/2_02_CygWin.md
+  - Software:
+    - 3_Software/index.md
+    - All-in-one: 3_Software/3_01_allInOne.md
+    - CLI via SSH: 3_Software/3_02_CLI_SSH.md
+    - SFTP file transfer: 3_Software/3_03_SFTP.md
+    - SSHFS file access: 3_Software/3_04_SSHFS.md
+    - X server: 3_Software/3_05_Xserver.md
+    - VNC clients: 3_Software/3_06_VNC.md
+    - NX clients: 3_Software/3_07_NX.md
   - Cluster software stack on Windows: 4_EESSI/index.md
   - Issues:
     - 5_Issues/index.md
