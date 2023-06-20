@@ -12,7 +12,7 @@ the server and on a mounted volume simultaneously will lead to unpredictable res
 On Linux, where it was first introduced, sshfs is a userspace file system. So one needs
 tp first install a piece of software called [FUSE](https://www.kernel.org/doc/html/next/filesystems/fuse.html)
 to support user space file systems, and then the software that provides sshfs. 
-Implementations on other file systems often follow a similar approach.
+Implementations on other operating systems often follow a similar approach.
 
 ## In Windows (and therefore CygWin)
 
@@ -41,11 +41,6 @@ which supports multiple operating systems and several user space file systems.
     -   [WinFsp on GitHub](https://github.com/winfsp/winfsp)
     -   [sshfs-win on GitHub](https://github.com/winfsp/sshfs-win)
 
-Note that there used to be another similar project known as [sshfs-win](https://github.com/feo-cz/win-sshfs)
-or previously Dokan, but that hasn't seen any recent activity.
-Even though it still supports Windows 10 it is not advised to still use it as it is very likely the
-package has unfixed security issues, or may not even work correctly with some recent ssh servers.
-
 
 ### Dokan
 
@@ -64,6 +59,14 @@ At the time of writing there don't seem to be pre-built packages available.
 
 ### Commercial implementations
 
+This list by no means aims to be complete.
+
+-   [Mountain Duck](https://mountainduck.io/) is a package from the developers of
+    CyberDuck that supports not only the sftp protocol (on which sshfs implementations
+    are based) but also several cloud storage technologies, including S3. Contrary to
+    CyberDuck it also allows to mount volumes and claims to use smart synchronization
+    that also enables offline work. It supports both Windows and macOS.
+
 -   [NetDrive](https://www.netdrive.net/) is a commercial package for Windows and macOS that does not
     only support SSHFS but can also mount several other types of cloud storage as if it is a local file
     system, including, e.g., S3. There is a personal version which is still relatively cheap, but the
@@ -73,7 +76,10 @@ At the time of writing there don't seem to be pre-built packages available.
 -   [ExpanDrive](https://www.expandrive.com/) is a similar product that also supports several cloud storage
     solutions and supports not only Windows and macOS but even some Linux versions.
 
--   [nsoftware SFTP Drive](https://www.nsoftware.com/sftpdrive/) also supports Windows, macOS and Linux.
+-   [/n software SFTP Drive](https://www.nsoftware.com/sftpdrive/) also supports Windows, macOS and Linux.
+
+-   [CloudMounter](https://cloudmounter.net/mount-cloud-drive-win.html) is another package enabling mounting from an
+    sftp server, and it too supports some other cloud storage technologies. It also exists in a version for macOS.
 
 
 ## In WSL
