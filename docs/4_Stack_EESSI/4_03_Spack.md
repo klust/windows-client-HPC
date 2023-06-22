@@ -1,0 +1,2 @@
+# Spack package manager
+
