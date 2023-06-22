@@ -5,7 +5,7 @@
     of the WSL environment, e.g., on a system where you only use CygWin
     as a Unix/Linux emulation layer and want to avoid the use of WSL. 
 
-    Since late November the Microsoft store version of WSL is available.
+    Since late November 2022 the Microsoft store version of WSL is available.
     This is a version of WSL2 that contains built-in support for WSL
     (dubbed WSLg). Windows 11 will render the
     image in the Linux server and push the image to the Windows screen via
@@ -56,7 +56,8 @@ minor fee or donation to compensate for that effort.
     1.4 extension, but it is not clear if it is hardware accelerated or
     just a software OpenGL emulation. Like all X servers further down in
     the list, it is basically the work of a single person so there is no
-    guarantee that the work will continue and limited support.\
+    guarantee that the work will continue and limited support.
+
     A big disadvantage of this X server is that it runs with access
     control disabled, allowing all computers on the network to access
     the X server unless the firewall on your machine stops the
@@ -91,8 +92,13 @@ minor fee or donation to compensate for that effort.
     machine and hence doesn't share localhost with Windows. You'll have
     to start Xming with access control disabled (using the -ac command
     line option) and set the DISPLAY environment variable in your WSL2
-    session with export DISPLAY=\$(cat /etc/resolv.conf \| grep
-    nameserver \| awk \'{print \$2; exit;}\'):0 which is a trick that
+    session with 
+    
+    ```
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print \$2; exit;}'):0 
+    ```
+
+    which is a trick that
     works with the other X servers also.
 
 -   [X410](https://x410.dev/): This is a port of the X.org X-server

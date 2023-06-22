@@ -27,28 +27,28 @@ Solutions:
     be used to connect WSL 1 sessions to the ssh agent service in
     Windows.
 
--   WSL 2: Here a different approach has to be taken, using socat (which
+-   WSL 2: Here a different approach has to be taken, using `socat` (which
     you may need to install in your Linux distribution) and a Windows
     program, [npiperelay.exe](https://github.com/jstarks/npiperelay),
     that needs to be installed on a Windows file system (as Windows must
-    be able to run the program).\
+    be able to run the program).
     This should be set up in your .bash_profile or .bashrc (I do so in
     .bash_profile as that is the typical place to set environment
     variables):
 
-``` bash
-export SSH_AUTH_SOCK=/home/$USER/.agent.sock.$WSL_DISTRO_NAME
-ss -a | grep -q $SSH_AUTH_SOCK
-if [ $? -ne 0   ]; then
-    rm -f $SSH_AUTH_SOCK
-    ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"$HOME/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
-fi
-```
+    ``` bash
+    export SSH_AUTH_SOCK=/home/$USER/.agent.sock.$WSL_DISTRO_NAME
+    ss -a | grep -q $SSH_AUTH_SOCK
+    if [ $? -ne 0   ]; then
+        rm -f $SSH_AUTH_SOCK
+        ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"$HOME/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+    fi
+    ```
 
 There are a few caveats:
 
 -   `SSH_AUTH_SOCK` points to the socket that will be used to communicate
-    with the ssh agent. In most WSL distributions, this should be on an
+    with the ssh agent. In most (all?) WSL distributions, this should be on an
     internal Linux file system. So in case you use your Windows home
     directory also as the home directory in your WSL distribution, you
     should not put the socket there. This is why `/home/$USER` is used
@@ -59,7 +59,7 @@ There are a few caveats:
     possible since all distributions run in the same virtual machine,
     but they have different user spaces so that does not work.
 
--   The second line tests if there is already an socat process managing
+-   The second line tests if there is already an `socat` process managing
     that socket.
 
 -   The crucial line is the `setsid socat` line:
@@ -69,7 +69,7 @@ There are a few caveats:
         `npiperelay.exe` comes in. It acts as the translator between Linux
         sockets and the Windows named pipe.
 
-    -   The `socat` process listens at the Linux site. Whenever ssh
+    -   The `socat` process listens at the Linux side. Whenever ssh
         contacts the socket, it starts `npiperelay.exe` to talk to the
         Windows named pipe. The `npiperelay.exe` process is started with
         options that will terminate it after the command from the ssh
@@ -85,7 +85,7 @@ There are a few caveats:
 
 At the moment of writing, this process was tested and works in Fedora
 38, OpenSUSE 15 SP4 and Ubuntu 22.4.2 LTS. 
-It does require updating the ssh-agent in Windows though which was easy to do 
+It does require updating the ssh-agent in Windows though is easy to do 
 [with a beta version](https://github.com/PowerShell/Win32-OpenSSH/releases/) 
 as MSI packages are available. I did find a download site with release
 versions also but lost the link and it only contained compressed archives
