@@ -8,27 +8,27 @@
       
       
       
-        <link rel="canonical" href="https://klust.github.io/windows-client-HPC/4_EESSI/">
+        <link rel="canonical" href="https://klust.github.io/windows-client-HPC/4_Stack_EESSI/4_02_EasyBuild/">
       
       
-        <link rel="prev" href="../3_Software/3_07_NX/">
+        <link rel="prev" href="../4_01_EESSI/">
       
       
-        <link rel="next" href="../5_Issues/">
+        <link rel="next" href="../4_03_Spack/">
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
-        <title>Cluster software stack on Windows - Using Windows as a client for HPC systems</title>
+        <title>EasyBuild - Using Windows as a client for HPC systems</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -44,7 +44,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-a-cluster-software-stack-on-windows-with-eessi" class="md-skip">
+        <a href="#easybuild-software-installation" class="md-skip">
           Skip to content
         </a>
       
@@ -89,7 +89,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Using Windows as a client for HPC systems" class="md-header__button md-logo" aria-label="Using Windows as a client for HPC systems" data-md-component="logo">
+    <a href="../.." title="Using Windows as a client for HPC systems" class="md-header__button md-logo" aria-label="Using Windows as a client for HPC systems" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cluster software stack on Windows
+              EasyBuild
             
           </span>
         </div>
@@ -183,7 +183,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Using Windows as a client for HPC systems" class="md-nav__button md-logo" aria-label="Using Windows as a client for HPC systems" data-md-component="logo">
+    <a href="../.." title="Using Windows as a client for HPC systems" class="md-nav__button md-logo" aria-label="Using Windows as a client for HPC systems" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -202,7 +202,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -217,7 +217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../0_00_introduction/" class="md-nav__link">
+      <a href="../../0_00_introduction/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -256,7 +256,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../1_ProtocolsTechnologies/">Protocols and technologies</a>
+          <a href="../../1_ProtocolsTechnologies/">Protocols and technologies</a>
           
             <label for="__nav_3">
               <span class="md-nav__icon md-icon"></span>
@@ -279,7 +279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../1_ProtocolsTechnologies/1_01_SSH/" class="md-nav__link">
+      <a href="../../1_ProtocolsTechnologies/1_01_SSH/" class="md-nav__link">
         SSH
       </a>
     </li>
@@ -293,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../1_ProtocolsTechnologies/1_02_Remote_graphics/" class="md-nav__link">
+      <a href="../../1_ProtocolsTechnologies/1_02_Remote_graphics/" class="md-nav__link">
         Remote graphics
       </a>
     </li>
@@ -307,7 +307,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../1_ProtocolsTechnologies/1_03_Globus/" class="md-nav__link">
+      <a href="../../1_ProtocolsTechnologies/1_03_Globus/" class="md-nav__link">
         Globus and GridFTP for file transfer
       </a>
     </li>
@@ -351,7 +351,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../2_LinuxOnWin/">Creating a Linux-like environment on Windows</a>
+          <a href="../../2_LinuxOnWin/">Creating a Linux-like environment on Windows</a>
           
             <label for="__nav_4">
               <span class="md-nav__icon md-icon"></span>
@@ -374,7 +374,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2_LinuxOnWin/2_01_WSL/" class="md-nav__link">
+      <a href="../../2_LinuxOnWin/2_01_WSL/" class="md-nav__link">
         WSL and WSL2
       </a>
     </li>
@@ -388,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2_LinuxOnWin/2_02_CygWin/" class="md-nav__link">
+      <a href="../../2_LinuxOnWin/2_02_CygWin/" class="md-nav__link">
         CygWin
       </a>
     </li>
@@ -442,7 +442,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../3_Software/">Software</a>
+          <a href="../../3_Software/">Software</a>
           
             <label for="__nav_5">
               <span class="md-nav__icon md-icon"></span>
@@ -465,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_01_allInOne/" class="md-nav__link">
+      <a href="../../3_Software/3_01_allInOne/" class="md-nav__link">
         All-in-one
       </a>
     </li>
@@ -479,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_02_CLI_SSH/" class="md-nav__link">
+      <a href="../../3_Software/3_02_CLI_SSH/" class="md-nav__link">
         CLI via SSH
       </a>
     </li>
@@ -493,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_03_SFTP/" class="md-nav__link">
+      <a href="../../3_Software/3_03_SFTP/" class="md-nav__link">
         SFTP file transfer
       </a>
     </li>
@@ -507,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_04_SSHFS/" class="md-nav__link">
+      <a href="../../3_Software/3_04_SSHFS/" class="md-nav__link">
         SSHFS file access
       </a>
     </li>
@@ -521,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_05_Xserver/" class="md-nav__link">
+      <a href="../../3_Software/3_05_Xserver/" class="md-nav__link">
         X server
       </a>
     </li>
@@ -535,7 +535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_06_VNC/" class="md-nav__link">
+      <a href="../../3_Software/3_06_VNC/" class="md-nav__link">
         VNC clients
       </a>
     </li>
@@ -549,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3_Software/3_07_NX/" class="md-nav__link">
+      <a href="../../3_Software/3_07_NX/" class="md-nav__link">
         NX clients
       </a>
     </li>
@@ -572,6 +572,69 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../">Cluster software stack on Windows</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Cluster software stack on Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_01_EESSI/" class="md-nav__link">
+        EESSI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -581,9 +644,30 @@
       
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Cluster software stack on Windows
+        EasyBuild
       </a>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_03_Spack/" class="md-nav__link">
+        Spack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -624,7 +708,7 @@
         
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../5_Issues/">Issues</a>
+          <a href="../../5_Issues/">Issues</a>
           
             <label for="__nav_7">
               <span class="md-nav__icon md-icon"></span>
@@ -647,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_Issues/5_01_SSH_key_management/" class="md-nav__link">
+      <a href="../../5_Issues/5_01_SSH_key_management/" class="md-nav__link">
         SSH key management
       </a>
     </li>
@@ -661,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_Issues/5_02_Connecting_WinX/" class="md-nav__link">
+      <a href="../../5_Issues/5_02_Connecting_WinX/" class="md-nav__link">
         Connecting to an X server in the Windows process space
       </a>
     </li>
@@ -675,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_Issues/5_03_SecureX/" class="md-nav__link">
+      <a href="../../5_Issues/5_03_SecureX/" class="md-nav__link">
         Securing an X server in the Windows process space
       </a>
     </li>
@@ -689,7 +773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_Issues/5_04_Mapping_users/" class="md-nav__link">
+      <a href="../../5_Issues/5_04_Mapping_users/" class="md-nav__link">
         Mapping users and groups between the Windows and WSL space
       </a>
     </li>
@@ -703,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5_Issues/5_05_Upgrading_Linux/" class="md-nav__link">
+      <a href="../../5_Issues/5_05_Upgrading_Linux/" class="md-nav__link">
         Upgrading Linux in WSL
       </a>
     </li>
@@ -750,30 +834,14 @@
                   
 
 
-<h1 id="running-a-cluster-software-stack-on-windows-with-eessi">Running a cluster software stack on Windows with EESSI<a class="headerlink" href="#running-a-cluster-software-stack-on-windows-with-eessi" title="Permanent link">&para;</a></h1>
-<p>Yes, it is possible to run a typical HPC cluster stack on Windows in a
-WSL Linux virtual machine. There is a freely available software stack
-made available by <a href="https://www.eessi-hpc.org/">the EESSI project</a> which
-at the time of writing this part of this text (March 2021) is still in
-pilot phase with very limited program support.</p>
-<p>The goal of EESSI is to make a full software stack available via the
-so-called CernVM-FS file system which implements a read-only network
-file system based on web technology that is ideal to distribute
-software. The downside is that it is pretty hard to set up and that it
-does require some manual intervention on Windows to start each time
-Windows is rebooted or the WSL virtual machine is killed for any other
-reason as WSL does not yet provide the necessary support to auto-start
-the needed services. However, you need to install very little software
-locally while a new software stack will become available automatically
-and periodically.</p>
-<p>TODO: Instructions.</p>
+<h1 id="easybuild-software-installation">EasyBuild software installation<a class="headerlink" href="#easybuild-software-installation" title="Permanent link">&para;</a></h1>
 
   <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 8, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 22, 2023</span>
       
     
   </small>
@@ -835,10 +903,10 @@ and periodically.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.indexes", "header.autohide", "toc.follow"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.indexes", "header.autohide", "toc.follow"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>

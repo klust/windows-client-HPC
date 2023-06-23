@@ -634,10 +634,92 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../4_Stack_EESSI/">Cluster software stack on Windows</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Cluster software stack on Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../4_EESSI/" class="md-nav__link">
-        Cluster software stack on Windows
+      <a href="../../4_Stack_EESSI/4_01_EESSI/" class="md-nav__link">
+        EESSI
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_02_EasyBuild/" class="md-nav__link">
+        EasyBuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_03_Spack/" class="md-nav__link">
+        Spack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -850,15 +932,15 @@ It makes use of the kernel structure of the NT-based Windows versions (which is 
 of Windows from Windows XP on), which can support <em>subsystems</em> that then can implement OS emulation.
 The original Windows NT kernel already had a POSIX subsystem as POSIX compatibility was a requirement to
 be able to sell Windows to certain USA government agencies. 
-Already in the '90s a third party company, Softway Systems, developed a more extensive UMIX emulation, 
+Already in the '90s a third party company, Softway Systems, developed a more extensive UNIX emulation, 
 originally called OpenNT and later renamed to <a href="https://en.wikipedia.org/wiki/Interix">Interix</a>. That
-technology required a re-compilation of UNIX software though. Microsoft aquired that technology
+technology required a re-compilation of UNIX software though. Microsoft acquired that technology
 and used it for a while in some Windows versions without much further development. However, it is rather 
 likely that WSL 1 found its roots in that technology, though most sources claim that it 
 started with an effort to try to run some Android applications on a version of Windows 10, a
 technology that was never released in its original form.</p>
 <p>WSL 1 differs from OpenNT/Interix in that it offers Linux compatibility and runs native Linux 
-binaries. It appeared with Windows 10. It launched in 2016.</p>
+binaries. It launched in 2016 with Windows 10.</p>
 <p>It was possible to install several versions of Linux on top of the subsystem. Many but not all
 user-level features of those Linux distributions could then be supported, but the kernel used
 in those distributions was replaced by the WSL subsystem which was not a real Linux kernel.</p>
@@ -881,7 +963,7 @@ experimented with three of them:</p>
 <ul>
 <li>
 <p><a href="https://apps.microsoft.com/store/detail/fedora-remix-for-wsl/9N6GDM4K2HNC">Fedora Remix for WSL</a>
-    is a commerdial product, though very cheap. It is produced by 
+    is a commercial product, though very cheap. It is produced by 
     <a href="https://www.whitewaterfoundry.com/">Whitewater Foundry</a> whose main product is the more expensive
     Pengwin Enterprise distribution based on Red Hat that is oriented towards enterprise use.</p>
 <p>It is a nice distribution if you need something that is easy to install, not expensive, and
@@ -901,7 +983,7 @@ which seems to be the more popular CentOS replacement in HPC, was not available 
 clusters, e.g., most Cray EX systems (including the European pre-exascale cluster LUMI).</p>
 </li>
 <li>
-<p>There are also various packages for Ubuntu developeed by Canonical itself, with different upgrade
+<p>There are also various packages for Ubuntu developed by Canonical itself, with different upgrade
     policies: <a href="https://apps.microsoft.com/store/detail/ubuntu/9PDXGNCFSCZV">one that follows the latest LTS release</a>
     and packages for individual LTS releases that are still maintained.
     Originally only the LTS versions were offered for WSL but there is now also a version that offers a daily
@@ -926,7 +1008,7 @@ not done through Windows Update or the Microsoft Store.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 20, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 22, 2023</span>
       
     
   </small>

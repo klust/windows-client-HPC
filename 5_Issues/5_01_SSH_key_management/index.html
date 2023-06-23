@@ -570,10 +570,92 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../4_Stack_EESSI/">Cluster software stack on Windows</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Cluster software stack on Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../4_EESSI/" class="md-nav__link">
-        Cluster software stack on Windows
+      <a href="../../4_Stack_EESSI/4_01_EESSI/" class="md-nav__link">
+        EESSI
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_02_EasyBuild/" class="md-nav__link">
+        EasyBuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_03_Spack/" class="md-nav__link">
+        Spack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -845,16 +927,14 @@ Solutions:</p>
     Windows.</p>
 </li>
 <li>
-<p>WSL 2: Here a different approach has to be taken, using socat (which
+<p>WSL 2: Here a different approach has to be taken, using <code>socat</code> (which
     you may need to install in your Linux distribution) and a Windows
     program, <a href="https://github.com/jstarks/npiperelay">npiperelay.exe</a>,
     that needs to be installed on a Windows file system (as Windows must
-    be able to run the program).\
+    be able to run the program).
     This should be set up in your .bash_profile or .bashrc (I do so in
     .bash_profile as that is the typical place to set environment
     variables):</p>
-</li>
-</ul>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSH_AUTH_SOCK</span><span class="o">=</span>/home/<span class="nv">$USER</span>/.agent.sock.<span class="nv">$WSL_DISTRO_NAME</span>
 ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">$SSH_AUTH_SOCK</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -862,11 +942,13 @@ ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><spa
 <span class="w">    </span><span class="o">(</span><span class="w"> </span>setsid<span class="w"> </span>socat<span class="w"> </span>UNIX-LISTEN:<span class="nv">$SSH_AUTH_SOCK</span>,fork<span class="w"> </span>EXEC:<span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent&quot;</span>,nofork<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 <span class="k">fi</span>
 </code></pre></div>
+</li>
+</ul>
 <p>There are a few caveats:</p>
 <ul>
 <li>
 <p><code>SSH_AUTH_SOCK</code> points to the socket that will be used to communicate
-    with the ssh agent. In most WSL distributions, this should be on an
+    with the ssh agent. In most (all?) WSL distributions, this should be on an
     internal Linux file system. So in case you use your Windows home
     directory also as the home directory in your WSL distribution, you
     should not put the socket there. This is why <code>/home/$USER</code> is used
@@ -878,7 +960,7 @@ ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><spa
     but they have different user spaces so that does not work.</p>
 </li>
 <li>
-<p>The second line tests if there is already an socat process managing
+<p>The second line tests if there is already an <code>socat</code> process managing
     that socket.</p>
 </li>
 <li>
@@ -891,7 +973,7 @@ ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><spa
     sockets and the Windows named pipe.</p>
 </li>
 <li>
-<p>The <code>socat</code> process listens at the Linux site. Whenever ssh
+<p>The <code>socat</code> process listens at the Linux side. Whenever ssh
     contacts the socket, it starts <code>npiperelay.exe</code> to talk to the
     Windows named pipe. The <code>npiperelay.exe</code> process is started with
     options that will terminate it after the command from the ssh
@@ -912,7 +994,7 @@ ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><spa
 </ul>
 <p>At the moment of writing, this process was tested and works in Fedora
 38, OpenSUSE 15 SP4 and Ubuntu 22.4.2 LTS. 
-It does require updating the ssh-agent in Windows though which was easy to do 
+It does require updating the ssh-agent in Windows though is easy to do 
 <a href="https://github.com/PowerShell/Win32-OpenSSH/releases/">with a beta version</a> 
 as MSI packages are available. I did find a download site with release
 versions also but lost the link and it only contained compressed archives
@@ -969,7 +1051,7 @@ export SSH_AUTH_SOCK=”/tmp/ssh-agent-pipe”
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">May 5, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 22, 2023</span>
       
     
   </small>

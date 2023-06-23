@@ -582,10 +582,92 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../4_Stack_EESSI/">Cluster software stack on Windows</a>
+          
+            <label for="__nav_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Cluster software stack on Windows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../4_EESSI/" class="md-nav__link">
-        Cluster software stack on Windows
+      <a href="../../4_Stack_EESSI/4_01_EESSI/" class="md-nav__link">
+        EESSI
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_02_EasyBuild/" class="md-nav__link">
+        EasyBuild
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4_Stack_EESSI/4_03_Spack/" class="md-nav__link">
+        Spack
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -758,7 +840,7 @@
 <p>This section is only relevant if you want to use an X server outside
 of the WSL environment, e.g., on a system where you only use CygWin
 as a Unix/Linux emulation layer and want to avoid the use of WSL. </p>
-<p>Since late November the Microsoft store version of WSL is available.
+<p>Since late November 2022 the Microsoft store version of WSL is available.
 This is a version of WSL2 that contains built-in support for WSL
 (dubbed WSLg). Windows 11 will render the
 image in the Linux server and push the image to the Windows screen via
@@ -811,16 +893,16 @@ minor fee or donation to compensate for that effort.</p>
     1.4 extension, but it is not clear if it is hardware accelerated or
     just a software OpenGL emulation. Like all X servers further down in
     the list, it is basically the work of a single person so there is no
-    guarantee that the work will continue and limited support.\
-    A big disadvantage of this X server is that it runs with access
-    control disabled, allowing all computers on the network to access
-    the X server unless the firewall on your machine stops the
-    applications from doing so. But tuning the firewall to only let
-    traffic from the WSL virtual machine pass is no easy feat, also
-    because the feature that sets the DISPLAY variable doesn't use the
-    internal virtual connection. It may be a good enough X server to use
-    at home but it should not be used in public spaces or on, e.g., a
-    university network.</p>
+    guarantee that the work will continue and limited support.</p>
+<p>A big disadvantage of this X server is that it runs with access
+control disabled, allowing all computers on the network to access
+the X server unless the firewall on your machine stops the
+applications from doing so. But tuning the firewall to only let
+traffic from the WSL virtual machine pass is no easy feat, also
+because the feature that sets the DISPLAY variable doesn't use the
+internal virtual connection. It may be a good enough X server to use
+at home but it should not be used in public spaces or on, e.g., a
+university network.</p>
 </li>
 <li>
 <p><a href="https://sourceforge.net/projects/vcxsrv/">VcXsrv</a>: This X server
@@ -848,9 +930,11 @@ minor fee or donation to compensate for that effort.</p>
     machine and hence doesn't share localhost with Windows. You'll have
     to start Xming with access control disabled (using the -ac command
     line option) and set the DISPLAY environment variable in your WSL2
-    session with export DISPLAY=\$(cat /etc/resolv.conf | grep
-    nameserver | awk \'{print \$2; exit;}\'):0 which is a trick that
-    works with the other X servers also.</p>
+    session with </p>
+<div class="highlight"><pre><span></span><code>export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk &#39;{print \$2; exit;}&#39;):0 
+</code></pre></div>
+<p>which is a trick that
+works with the other X servers also.</p>
 </li>
 <li>
 <p><a href="https://x410.dev/">X410</a>: This is a port of the X.org X-server
@@ -911,7 +995,7 @@ products.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 20, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 22, 2023</span>
       
     
   </small>
