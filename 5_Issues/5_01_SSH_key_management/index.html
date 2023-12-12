@@ -1145,9 +1145,12 @@ Solutions:</p>
 ss<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="nv">$SSH_AUTH_SOCK</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$?</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">0</span><span class="w">   </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$SSH_AUTH_SOCK</span>
-<span class="w">    </span><span class="o">(</span><span class="w"> </span>setsid<span class="w"> </span>socat<span class="w"> </span>UNIX-LISTEN:<span class="nv">$SSH_AUTH_SOCK</span>,fork<span class="w"> </span>EXEC:<span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent&quot;</span>,nofork<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="w">    </span><span class="o">(</span><span class="w"> </span>setsid<span class="w"> </span>socat<span class="w"> </span>UNIX-LISTEN:<span class="nv">$SSH_AUTH_SOCK</span>,fork,umask<span class="o">=</span><span class="m">077</span><span class="w"> </span>EXEC:<span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent&quot;</span>,nofork<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="o">)</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 <span class="k">fi</span>
 </code></pre></div>
+<p>(The <code>umask=077</code> part in the line above can in most cases be omitted as 
+the UNIX domain socket is created in the home diretory and hence shouldn't be
+accessible to others anyway.)</p>
 </li>
 </ul>
 <p>There are a few caveats:</p>
@@ -1257,7 +1260,7 @@ export SSH_AUTH_SOCK=”/tmp/ssh-agent-pipe”
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">June 22, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 12, 2023</span>
       
     
   </small>
