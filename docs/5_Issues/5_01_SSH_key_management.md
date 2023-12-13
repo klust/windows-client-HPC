@@ -41,9 +41,13 @@ Solutions:
     ss -a | grep -q $SSH_AUTH_SOCK
     if [ $? -ne 0   ]; then
         rm -f $SSH_AUTH_SOCK
-        ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"$HOME/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+        ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork,umask=077 EXEC:"$HOME/.wsl/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
     fi
     ```
+
+    (The `umask=077` part in the line above can in most cases be omitted as 
+    the UNIX domain socket is created in the home diretory and hence shouldn't be
+    accessible to others anyway.)
 
 There are a few caveats:
 
