@@ -11,6 +11,7 @@ theme:
     - navigation.top
     - navigation.indexes
     - header.autohide
+    - content.code.copy
     - toc.follow
   palette:
     - primary: black
