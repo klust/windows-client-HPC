@@ -13,6 +13,9 @@
     acceleration on the graphics card if a compatible Windows display driver
     is used. 
 
+    Also check the [WSLg documentation](https://github.com/microsoft/wslg)
+    on GitHub!
+
 In the past, there were several commercial X servers that offered much
 better performance than the freely available ones. These however have
 lost popularity, especially when the server running the X applications
