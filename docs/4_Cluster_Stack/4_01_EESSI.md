@@ -49,7 +49,9 @@ In particular, look for the fiels in the newest `cvmfs-*` subdirectory and the
     (You'll have to check the version of `cvmfs-config-default` also, there is a `-latest` version
     but when checking this was actually a rather old file.)
 
--   Note that it is no longer needed to install 
+-   Note that it is no longer needed to install the EESSI configuration file for CernVM-FS
+    (`cvmfs-config-eessi-latest.noarch.rpm`) as the new EESSI repository is included in
+    the configurations of CVMFS.
 
 -   Create (you'll have to run in a bash shell as root or run the editor using `sudo`) the file
     `/etc/cvmfs/default.local`. If you're experimenting on a workstation with no nearby cache 
@@ -80,7 +82,7 @@ In particular, look for the fiels in the newest `cvmfs-*` subdirectory and the
 
 -   At this point you may need a full restart of OpenSUSE.
 
--   The following stap will have to be done whenever the WSL2 OpenSUSE container is restarted:
+-   The following step will have to be done whenever the WSL2 OpenSUSE container is restarted:
 
     ``` bash
     sudo cvmfs_config wsl2_start

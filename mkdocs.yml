@@ -38,10 +38,10 @@ nav:
     - VNC clients: 3_Software/3_06_VNC.md
     - NX clients: 3_Software/3_07_NX.md
   - Cluster software stack on Windows: 
-    - 4_Stack_EESSI/index.md
-    - EESSI: 4_Stack_EESSI/4_01_EESSI.md
-    - EasyBuild: 4_Stack_EESSI/4_02_EasyBuild.md
-    - Spack: 4_Stack_EESSI/4_03_Spack.md
+    - 4_Cluster_Stack/index.md
+    - EESSI: 4_Cluster_Stack/4_01_EESSI.md
+    - EasyBuild: 4_Cluster_Stack/4_02_EasyBuild.md
+    - Spack: 4_Cluster_Stack/4_03_Spack.md
   - Issues:
     - 5_Issues/index.md
     - SSH key management: 5_Issues/5_01_SSH_key_management.md
