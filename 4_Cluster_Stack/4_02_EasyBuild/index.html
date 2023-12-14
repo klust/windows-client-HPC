@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://klust.github.io/windows-client-HPC/4_Stack_EESSI/4_01_EESSI/">
+        <link rel="canonical" href="https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_02_EasyBuild/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../4_01_EESSI/">
       
       
-        <link rel="next" href="../4_02_EasyBuild/">
+        <link rel="next" href="../4_03_Spack/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>EESSI - Using Windows as a client for HPC systems</title>
+        <title>EasyBuild - Using Windows as a client for HPC systems</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-a-cluster-software-stack-on-windows-with-eessi" class="md-skip">
+        <a href="#easybuild-software-installation" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              EESSI
+              EasyBuild
             
           </span>
         </div>
@@ -751,6 +751,26 @@
                 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../4_01_EESSI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EESSI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -762,76 +782,7 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    EESSI
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    EESSI
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#example-setup-on-opensuse-in-wsl2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example: Setup on OpenSUSE in WSL2
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-links" class="md-nav__link">
-    <span class="md-ellipsis">
-      Useful links
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4_02_EasyBuild/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -840,6 +791,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -1061,32 +1013,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#example-setup-on-opensuse-in-wsl2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example: Setup on OpenSUSE in WSL2
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#useful-links" class="md-nav__link">
-    <span class="md-ellipsis">
-      Useful links
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1100,114 +1026,7 @@
                   
 
 
-<h1 id="running-a-cluster-software-stack-on-windows-with-eessi">Running a cluster software stack on Windows with EESSI<a class="headerlink" href="#running-a-cluster-software-stack-on-windows-with-eessi" title="Permanent link">&para;</a></h1>
-<p>The goal of <a href="https://www.eessi-hpc.org/">the EESSI project</a> is to 
-make a full software stack available with binaries optimised for 
-several popular architectures via a read-only web based file
-system. So software is served on demand and does not require
-installing the complete stack on your PC.</p>
-<p>To this end it uses the so-called CernVM-FS file system. This requires
-the installation of some additional software in WSL 2 that 
-does not come from the standard software libaries. 
-WSL 2 also for a long time did not support the mechanisms that are
-needed to start the file system daemons automatically so a manual 
-intervention may be needed each time you restart WSL 2. </p>
-<p>At the time of writing of the last revision (December 2023), EESI is still
-very much in a prototype phase. However, it got some funding through
-the EuroHPC Centre of Excellence MultiXScale for further development so the speed
-may pick up a little.
-The <a href="https://www.eessi.io/docs/">EESSI documentation</a> was outdated and did not
-yet cover the new setup that requires far fewer steps to get CernVM-FS working,
-so the instructions below are the result of some experimenting als.</p>
-<p>Getting it to work (without using a container, which would also
-require installing additional software in most if not all WSL Linux
-distributions) does require an initial effort.</p>
-<h2 id="example-setup-on-opensuse-in-wsl2">Example: Setup on OpenSUSE in WSL2<a class="headerlink" href="#example-setup-on-opensuse-in-wsl2" title="Permanent link">&para;</a></h2>
-<p><em>Last update: 14 December 2023</em></p>
-<p>The <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html">"Getting Started" section of the CernVM-FS manual</a>
-unfortunately does not contain instructions for SUSE Linux.
-There are relevant files though in the <a href="https://ecsft.cern.ch/dist/cvmfs/">CVMFS repository @ CERN</a>.
-In particular, look for the fiels in the newest <code>cvmfs-*</code> subdirectory and the
-<code>cvmfs-config</code> subdirectory.</p>
-<ul>
-<li>
-<p>Similarly to what is done on Fedora, install directly from this repository.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">version</span><span class="o">=</span><span class="s1">&#39;2.11.2&#39;</span>
-sudo<span class="w"> </span>zypper<span class="w"> </span>--no-gpg-checks<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-2.1-1.noarch.rpm<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$version</span>/cvmfs-<span class="nv">$version</span>-1.sle15.x86_64.rpm<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$version</span>/cvmfs-libs-<span class="nv">$version</span>-1.sle15.x86_64.rpm
-</code></pre></div>
-<p>(You'll have to check the version of <code>cvmfs-config-default</code> also, there is a <code>-latest</code> version
-but when checking this was actually a rather old file.)</p>
-</li>
-<li>
-<p>Note that it is no longer needed to install </p>
-</li>
-<li>
-<p>Create (you'll have to run in a bash shell as root or run the editor using <code>sudo</code>) the file
-    <code>/etc/cvmfs/default.local</code>. If you're experimenting on a workstation with no nearby cache 
-    server for CernVM-FS, then the following would be appropriate:</p>
-<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE=&quot;single&quot;
-CVMFS_HTTP_PROXY=&quot;DIRECT&quot;
-CVMFS_QUOTA_LIMIT=10000
-</code></pre></div>
-<p>or with bash commands:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=10000&#39;       &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-</code></pre></div>
-</li>
-<li>
-<p>Run the setup of cvmfs:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cvmfs_config<span class="w"> </span>setup
-</code></pre></div>
-</li>
-<li>
-<p>Now edit <code>/etc/auto.master</code> and uncomment the line
-    <code>#+dir:/etc/auto.master.d/</code>.</p>
-</li>
-<li>
-<p>At this point you may need a full restart of OpenSUSE.</p>
-</li>
-<li>
-<p>The following stap will have to be done whenever the WSL2 OpenSUSE container is restarted:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cvmfs_config<span class="w"> </span>wsl2_start
-</code></pre></div>
-</li>
-<li>
-<p>You should now be able to go into the <code>/cvmfs/software.eessi.io</code> subdirectory even if it is
-    not shown immediately if you do an <code>ls</code> in <code>/cvmfs</code> as it will only be mounted on access.</p>
-</li>
-<li>
-<p>You can now make EESSI available in a shell with</p>
-<div class="highlight"><pre><span></span><code>source /cvmfs/software.eessi.io/versions/2023.06/init/bash
-</code></pre></div>
-</li>
-</ul>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p><a href="https://eessi.io">EESSI web page</a></p>
-</li>
-<li>
-<p><a href="https://www.eessi.io/docs/">EESSI documentation</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/@eessi_community">EESSI YouTube channel</a></p>
-</li>
-<li>
-<p>MultiXscale Center of Excellence:</p>
-<ul>
-<li>
-<p><a href="https://www.multixscale.eu/">Home page</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/@MultiXscale">YouTube channel</a></p>
-</li>
-</ul>
-</li>
-</ul>
+<h1 id="easybuild-software-installation">EasyBuild software installation<a class="headerlink" href="#easybuild-software-installation" title="Permanent link">&para;</a></h1>
 
   <hr>
 <div class="md-source-file">

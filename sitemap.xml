@@ -86,22 +86,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://klust.github.io/windows-client-HPC/4_Stack_EESSI/</loc>
+         <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/</loc>
          <lastmod>2023-12-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://klust.github.io/windows-client-HPC/4_Stack_EESSI/4_01_EESSI/</loc>
+         <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_01_EESSI/</loc>
          <lastmod>2023-12-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://klust.github.io/windows-client-HPC/4_Stack_EESSI/4_02_EasyBuild/</loc>
+         <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_02_EasyBuild/</loc>
          <lastmod>2023-12-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://klust.github.io/windows-client-HPC/4_Stack_EESSI/4_03_Spack/</loc>
+         <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_03_Spack/</loc>
          <lastmod>2023-12-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
