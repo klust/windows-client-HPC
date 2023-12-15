@@ -135,4 +135,14 @@
          <lastmod>2023-12-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/</loc>
+         <lastmod>2023-12-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/A_01_openSUSE/</loc>
+         <lastmod>2023-12-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
