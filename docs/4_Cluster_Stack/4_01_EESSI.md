@@ -28,13 +28,57 @@ distributions) does require an initial effort.
 
 ## Example: Setup on OpenSUSE in WSL2
 
-*Last update: 14 December 2023*
+*Last update: 15 December 2023*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 unfortunately does not contain instructions for SUSE Linux.
 There are relevant files though in the [CVMFS repository @ CERN](https://ecsft.cern.ch/dist/cvmfs/).
-In particular, look for the fiels in the newest `cvmfs-*` subdirectory and the
+In particular, look for the files in the newest `cvmfs-*` subdirectory and the
 `cvmfs-config` subdirectory.
+
+This setup is for openSUSE 15 (tested with 15.4) on WSL2 with systemd enabled so
+that the automounter can be used and so that it is no longer needed to call
+`cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
+
+-   Ensure you have a openSUSE WSL2 setup with systemd and autofs enabled and 
+    running.
+
+    -   Ensure that the `wsl_systemd` pattern is installed to fully enable systemd:
+
+        ``` bash
+        sudo zypper install -n -t pattern wsl_systemd
+        ```
+
+        There are [other useful patterns](https://en.opensuse.org/openSUSE:WSL)
+        also and they do not always play nice with updating `/etc/wsl.conf`...
+
+    -   Ensure that `/etc/wsl.conf` exists and that the `[boot]` section contains the 
+        line `systemd=true`. The minimal such file would be
+
+        ``` text
+        [boot]
+        systemd=true
+        ```
+
+    -   Right now it is time to restart the openSUSE WSL2 distribution, e.g., 
+        from a normal bash command line:
+
+        ``` bash
+        wsl.exe --terminate $WSL_DISTRO_NAME
+        ```
+
+        or from powershell (terminating all WSL2 distros)
+
+        ``` text
+        wsl --shutdown
+        ```
+
+    -   Re-enter openSUSE en enable and start the autofs service:
+
+        ``` bash
+        sudo systemctl enable autofs.service
+        sudo systemctl start autofs
+        ```
 
 -   Similarly to what is done on Fedora, install directly from this repository.
 
@@ -71,6 +115,8 @@ In particular, look for the fiels in the newest `cvmfs-*` subdirectory and the
     sudo bash -c "echo 'CVMFS_QUOTA_LIMIT=10000'       >> /etc/cvmfs/default.local"
     ```
 
+    Ensure everybody has read access to the file.
+
 -   Run the setup of cvmfs:
 
     ``` bash
@@ -78,14 +124,16 @@ In particular, look for the fiels in the newest `cvmfs-*` subdirectory and the
     ```
 
 -   Now edit `/etc/auto.master` and uncomment the line
-    `#+dir:/etc/auto.master.d/`.
-
--   At this point you may need a full restart of OpenSUSE.
-
--   The following step will have to be done whenever the WSL2 OpenSUSE container is restarted:
+    `#+dir:/etc/auto.master.d/`. E.g.,
 
     ``` bash
-    sudo cvmfs_config wsl2_start
+    sudo sed -i 's%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%' /etc/auto.master
+    ```
+
+-   Restart the autofs service so that the above change takes effect:
+  
+    ``` bash
+    sudo systemctl restart autofs
     ```
 
 -   You should now be able to go into the `/cvmfs/software.eessi.io` subdirectory even if it is
