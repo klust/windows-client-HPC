@@ -11,6 +11,14 @@ exists and is used for some files that are different between distributions anywa
 I do store most files that cannot be easily regenerated in the Windows user diretories
 though as that makes experimenting with WSL, which may destroy my setup, easier.
 
+I've also set up the distribution to use WSLg so that GUI software can also run.
+
+Using systemd and WSLg also implies that you need at least a recent version of Windows
+10 or higher, with the Microsoft Store version of WSL2.
+
+[Installation instructions for WSL are available on the Microsoft web pages](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+
 ## Installation scripts
 
 I have had to re-install my openSUSE distribution a few times already, also because I 
