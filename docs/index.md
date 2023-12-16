@@ -28,3 +28,4 @@
     -   [Upgrading Linux in WSL](5_Issues/5_05_Upgrading_Linux.md)
 -   [Appendix A: Management tips](A_Management_tips/index.md)
     -   [openSUSE](A_Management_tips/A_01_openSUSE.md)
+    -   [Fedora Remix](A_Management_tips/A_02_Fedora_Remix.md)

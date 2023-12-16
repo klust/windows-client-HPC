@@ -52,6 +52,7 @@ nav:
   - "App. A: Management":
     - A_Management_tips/index.md
     - openSUSE on WSL2: A_Management_tips/A_01_openSUSE.md
+    - Fedora Remix on WSL2: A_Management_tips/A_02_Fedora_Remix.md
 
 
 plugins:

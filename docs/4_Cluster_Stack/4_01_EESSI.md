@@ -28,7 +28,7 @@ distributions) does require an initial effort.
 
 ## Example: Setup on OpenSUSE in WSL2
 
-*Last update: 15 December 2023*
+*Last update: 16 December 2023*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 unfortunately does not contain instructions for SUSE Linux.
@@ -71,13 +71,6 @@ that the automounter can be used and so that it is no longer needed to call
 
         ``` text
         wsl --shutdown
-        ```
-
-    -   Re-enter openSUSE en enable and start the autofs service:
-
-        ``` bash
-        sudo systemctl enable autofs.service
-        sudo systemctl start autofs
         ```
 
 -   Similarly to what is done on Fedora, install directly from this repository.
@@ -130,7 +123,14 @@ that the automounter can be used and so that it is no longer needed to call
     sudo sed -i 's%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%' /etc/auto.master
     ```
 
--   Restart the autofs service so that the above change takes effect:
+-   Enable and start the autofs service:
+
+    ``` bash
+    sudo systemctl enable autofs.service
+    sudo systemctl start autofs
+    ```
+
+    Or restart the autofs service if it was alreadyt present so that the above change takes effect:
   
     ``` bash
     sudo systemctl restart autofs
