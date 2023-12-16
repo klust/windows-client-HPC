@@ -14,6 +14,8 @@
         <link rel="prev" href="../">
       
       
+        <link rel="next" href="../A_02_Fedora_Remix/">
+      
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.11">
@@ -995,6 +997,8 @@
       
         
       
+        
+      
     
     
     
@@ -1104,6 +1108,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_02_Fedora_Remix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fedora Remix on WSL2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1192,15 +1216,10 @@ and <a href="https://www.eessi.io/docs/">EESSI documentation</a>.</p>
 <p>The option : Use this password for system administrator" is also left checked.</p>
 </li>
 <li>
-<p>I run two install scripts that execute a lot of commands via <code>sudo</code>. This process is
-    split in two steps as in between the openSUSE distribution has to be restarted to
-    enable systemd.</p>
-<p>There are ways to enable systemd globally for all distributions but that option turned
-out to be rather dangerous as some distributions, including openSUSE Leap 15.4 which I
-used for the tests for this section, do not have the necessary setup right away to use
-systemd, leading to hanging distros.</p>
-<p>The first script does some updates, enabling systemd and autofs, and sets the home directory
-for the account calling the script to the corresponding Windows user directory:</p>
+<p>I run an install script that execute a lot of commands via <code>sudo</code>. At the end a restart
+    is needed to ensure that changes take effect and a new session with systemd running
+    is started. After the reboot the automounter should be working so that you get 
+    direct access to, e.g., EESSI.</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#! /usr/bin/bash</span>
 
 <span class="c1"># Make the next one an empty variable if instead you prefer to run</span>
@@ -1227,48 +1246,13 @@ for the account calling the script to the corresponding Windows user directory:<
 <span class="c1"># Enable systemd (will only work after a reboot)</span>
 <span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo -e &#39;[boot]\nsystemd=true&#39; &gt;/etc/wsl.conf&quot;</span>
 
-<span class="c1"># Enable autofs.service</span>
-<span class="nv">$SUDO</span><span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>autofs.service
-
 <span class="c1"># Set the home directory of my account to the one on Windows</span>
 <span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;s|/home/</span><span class="nv">$edituser</span><span class="s2">|/mnt/c/Users/</span><span class="nv">$edituser</span><span class="s2">|&quot;</span><span class="w"> </span>/etc/passwd
 
-<span class="c1"># Give a message about the needed restart</span>
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Now reboot WSL2 or at least this distribution to enable systemd, e.g.,&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nwsl.exe --shutdown&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nor more selectively&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nwsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">&quot;</span>
-</code></pre></div>
-<p>After this, the second script installs a few more packages (you may have a very different
-choice) and also installs and configures CernVM-FS so that EESSI becomes available in
-<code>/cvmfs/software.eessi.io</code>. As the automounter is used, the <code>cvmfs_config wsl2_start</code>
-command mentioned in the CernVM-FS manual is not needed.</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#! /usr/bin/bash</span>
-<span class="c1">#</span>
-<span class="c1"># Note that this script assumes systemd is running.</span>
-<span class="c1">#</span>
-
-<span class="c1"># Make the next one an empty variable if instead you prefer to run</span>
-<span class="c1"># the whole script in sudo mode. </span>
-<span class="nv">SUDO</span><span class="o">=</span><span class="s1">&#39;sudo&#39;</span>
-
-<span class="c1"># socat to get access to the SSH agent of Windows</span>
-<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>-n<span class="w"> </span>socat
-
-<span class="c1"># Git</span>
-<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>git
-
-<span class="c1"># VIM colorschemes</span>
-<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>vim-plugin-colorschemes
-
-<span class="c1"># Newer Python. For OpenSUSE 15 SP4 this is Python 3.9 or Python 3.11</span>
-<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>python311
-
-<span class="c1"># Something to test if the X server is recognised</span>
-<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>xdpyinfo
-
 <span class="c1">#</span>
 <span class="c1"># Setting up EESSI</span>
+<span class="c1">#</span>
+<span class="c1"># This also ensure that the autofs service will be present</span>
 <span class="c1">#</span>
 <span class="nv">cvmfs_version</span><span class="o">=</span><span class="s1">&#39;2.11.2&#39;</span>
 <span class="nv">config_version</span><span class="o">=</span><span class="s1">&#39;2.1-1&#39;</span>
@@ -1288,11 +1272,47 @@ command mentioned in the CernVM-FS manual is not needed.</p>
 <span class="c1"># Not sure if the next one is already needed on OpenSUSE on WSL2:</span>
 <span class="c1"># Uncomment the line #+dir:/etc/auto.master.d/ in the file /etc/auto.master</span>
 <span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%&#39;</span><span class="w"> </span>/etc/auto.master
-<span class="nv">$SUDO</span><span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>autofs
 
 <span class="c1"># Already create /opt/eessi for EESSI even though we do not yet use it</span>
 <span class="nv">$SUDO</span><span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/eessi
+
+<span class="c1"># Enable autofs.service so that it is started after the next </span>
+<span class="c1"># reboot.</span>
+<span class="nv">$SUDO</span><span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>autofs.service
+
+<span class="c1">#</span>
+<span class="c1"># End of EESSI setup</span>
+<span class="c1">#</span>
+
+<span class="c1">#</span>
+<span class="c1"># Install a number of useful packages</span>
+<span class="c1">#</span>
+
+<span class="c1"># socat to get access to the SSH agent of Windows</span>
+<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>socat
+
+<span class="c1"># Git</span>
+<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>git
+
+<span class="c1"># VIM colorschemes</span>
+<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>vim-plugin-colorschemes
+
+<span class="c1"># Newer Python. For OpenSUSE 15 SP4 this is Python 3.9 or Python 3.11</span>
+<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>python311
+
+<span class="c1"># Something to test if the X server is recognised</span>
+<span class="nv">$SUDO</span><span class="w"> </span>zypper<span class="w"> </span>--non-interactive<span class="w"> </span>install<span class="w"> </span>xdpyinfo
+
+<span class="c1"># Give a message about the needed restart</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Now reboot WSL2 or at least this distribution to enable systemd, e.g.,&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;\nwsl.exe --shutdown&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;\nor more selectively&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">&quot;\nwsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">&quot;</span>
 </code></pre></div>
+<p>There are ways to enable systemd globally for all distributions but that option turned
+out to be rather dangerous as some distributions, including openSUSE Leap 15.4 which I
+used for the tests for this section, do not have the necessary setup right away to use
+systemd, leading to hanging distros.</p>
 </li>
 </ul>
 <details class="note">
@@ -1320,7 +1340,7 @@ create <code>/etc/wsl.conf</code> by hand.</p>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 15, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 16, 2023</span>
       
     
   </small>

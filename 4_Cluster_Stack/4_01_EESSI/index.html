@@ -1055,6 +1055,8 @@
       
         
       
+        
+      
     
     
     
@@ -1106,6 +1108,26 @@
   
   <span class="md-ellipsis">
     openSUSE on WSL2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../A_Management_tips/A_02_Fedora_Remix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fedora Remix on WSL2
   </span>
   
 
@@ -1204,7 +1226,7 @@ so the instructions below are the result of some experimenting als.</p>
 require installing additional software in most if not all WSL Linux
 distributions) does require an initial effort.</p>
 <h2 id="example-setup-on-opensuse-in-wsl2">Example: Setup on OpenSUSE in WSL2<a class="headerlink" href="#example-setup-on-opensuse-in-wsl2" title="Permanent link">&para;</a></h2>
-<p><em>Last update: 15 December 2023</em></p>
+<p><em>Last update: 16 December 2023</em></p>
 <p>The <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html">"Getting Started" section of the CernVM-FS manual</a>
 unfortunately does not contain instructions for SUSE Linux.
 There are relevant files though in the <a href="https://ecsft.cern.ch/dist/cvmfs/">CVMFS repository @ CERN</a>.
@@ -1239,12 +1261,6 @@ systemd=true
 </code></pre></div>
 <p>or from powershell (terminating all WSL2 distros)</p>
 <div class="highlight"><pre><span></span><code>wsl --shutdown
-</code></pre></div>
-</li>
-<li>
-<p>Re-enter openSUSE en enable and start the autofs service:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>autofs.service
-sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>autofs
 </code></pre></div>
 </li>
 </ul>
@@ -1292,7 +1308,11 @@ sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </spa
 </code></pre></div>
 </li>
 <li>
-<p>Restart the autofs service so that the above change takes effect:</p>
+<p>Enable and start the autofs service:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>autofs.service
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>autofs
+</code></pre></div>
+<p>Or restart the autofs service if it was alreadyt present so that the above change takes effect:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>autofs
 </code></pre></div>
 </li>
@@ -1335,7 +1355,7 @@ sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </spa
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 15, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 16, 2023</span>
       
     
   </small>
