@@ -817,6 +817,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#example-setup-on-ubuntu-in-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Setup on Ubuntu in WSL2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#useful-links" class="md-nav__link">
     <span class="md-ellipsis">
       Useful links
@@ -1066,6 +1075,8 @@
       
         
       
+        
+      
     
     
     
@@ -1146,6 +1157,26 @@
 
               
             
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../A_Management_tips/A_03_Ubuntu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu on WSL2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1192,6 +1223,15 @@
   <a href="#example-setup-on-fedora-remix-in-wsl2" class="md-nav__link">
     <span class="md-ellipsis">
       Example: Setup on Fedora Remix in WSL2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-setup-on-ubuntu-in-wsl2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Setup on Ubuntu in WSL2
     </span>
   </a>
   
@@ -1358,7 +1398,7 @@ In particular, look for the files in the newest <code>cvmfs-*</code> subdirector
 <a href="https://www.whitewaterfoundry.com/fedora-remix-for-wsl">Fedora Remix version 39</a>
 on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
-<code>cvmfs_config wsl2_start</code> every time the openSUSE distribution in WSL is restarted.</p>
+<code>cvmfs_config wsl2_start</code> every time the Fedora Remix distribution in WSL is restarted.</p>
 <ul>
 <li>
 <p>Ensure you have a Fedora Remix WSL2 setup with systemd running. We'll enable
@@ -1441,6 +1481,102 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
 </code></pre></div>
 </li>
 </ul>
+<h2 id="example-setup-on-ubuntu-in-wsl2">Example: Setup on Ubuntu in WSL2<a class="headerlink" href="#example-setup-on-ubuntu-in-wsl2" title="Permanent link">&para;</a></h2>
+<p><em>Last update: 19 December 2023</em></p>
+<p>The <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html">"Getting Started" section of the CernVM-FS manual</a>
+does contain instructions for the Ubuntu Linux distribution. 
+Contrary to Fedora and openSUSE, there is complete support for Ubuntu so the
+installation process is slightly different: Rather than downloading specific packages,
+the CERN repositories are added to the reposit list for Ubuntu and then the installation
+is done from there.</p>
+<p>This setup is was tested with Ubuntu 22.04
+on WSL2 with systemd enabled so
+that the automounter can be used and so that it is no longer needed to call
+<code>cvmfs_config wsl2_start</code> every time the Ubuntu distribution in WSL is restarted.</p>
+<ul>
+<li>
+<p>Ensure you have a Fedora Remix WSL2 setup with systemd running. We'll enable
+    autofs after installing EESSI as it may not yet be on the system but would
+    be pulled in as a dependency of EESSI anyway.</p>
+<ul>
+<li>
+<p>Ensure that <code>/etc/wsl.conf</code> exists and that the <code>[boot]</code> section contains the 
+    line <code>systemd=true</code>. The minimal <code>[boot]</code> section of this file would be</p>
+<div class="highlight"><pre><span></span><code>[boot]
+systemd=true
+</code></pre></div>
+</li>
+<li>
+<p>Right now it is time to restart the Fedora Remix WSL2 distribution, e.g., 
+    from a normal bash command line:</p>
+<div class="highlight"><pre><span></span><code>wsl.exe<span class="w"> </span>--terminate<span class="w"> </span><span class="nv">$WSL_DISTRO_NAME</span>
+</code></pre></div>
+<p>or from powershell (terminating all WSL2 distros)</p>
+<div class="highlight"><pre><span></span><code>wsl --shutdown
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Following the <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux">Debian/Ubuntu installation instructions</a>, 
+    frst add the CERN repositories to the repository list..</p>
+<div class="highlight"><pre><span></span><code><span class="nb">pushd</span><span class="w"> </span>/tmp
+wget<span class="w"> </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>cvmfs-release-latest_all.deb
+rm<span class="w"> </span>-f<span class="w"> </span>cvmfs-release-latest_all.deb
+<span class="nb">popd</span>
+</code></pre></div>
+</li>
+<li>
+<p>Next we actually install CernVM-FS:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>cvmfs
+</code></pre></div>
+</li>
+<li>
+<p>Note that it is no longer needed to install the EESSI configuration file for CernVM-FS
+    (<code>cvmfs-config-eessi-latest.noarch.rpm</code>) as the new EESSI repository is included in
+    the configurations of CVMFS.</p>
+</li>
+<li>
+<p>Create (you'll have to run in a bash shell as root or run the editor using <code>sudo</code>) the file
+    <code>/etc/cvmfs/default.local</code>. If you're experimenting on a workstation with no nearby cache 
+    server for CernVM-FS, then the following would be appropriate:</p>
+<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE=&quot;single&quot;
+CVMFS_HTTP_PROXY=&quot;DIRECT&quot;
+CVMFS_QUOTA_LIMIT=10000
+</code></pre></div>
+<p>or with bash commands:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=10000&#39;       &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+</code></pre></div>
+<p>Ensure everybody has read access to the file.</p>
+</li>
+<li>
+<p>Run the setup of cvmfs:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>cvmfs_config<span class="w"> </span>setup
+</code></pre></div>
+</li>
+<li>
+<p>Enable and start the autofs service:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>autofs.service
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>autofs
+</code></pre></div>
+<p>Or restart the autofs service if it was already present so that the above change takes effect:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>autofs
+</code></pre></div>
+</li>
+<li>
+<p>You should now be able to go into the <code>/cvmfs/software.eessi.io</code> subdirectory even if it is
+    not shown immediately if you do an <code>ls</code> in <code>/cvmfs</code> as it will only be mounted on access.</p>
+</li>
+<li>
+<p>You can now make EESSI available in a shell with</p>
+<div class="highlight"><pre><span></span><code>source /cvmfs/software.eessi.io/versions/2023.06/init/bash
+</code></pre></div>
+</li>
+</ul>
 <h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
@@ -1470,7 +1606,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 16, 2023</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 19, 2023</span>
       
     
   </small>
