@@ -29,3 +29,4 @@
 -   [Appendix A: Management tips](A_Management_tips/index.md)
     -   [openSUSE](A_Management_tips/A_01_openSUSE.md)
     -   [Fedora Remix](A_Management_tips/A_02_Fedora_Remix.md)
+    -   [Ubuntu](A_Management_tips/A_03_Ubuntu.md)
