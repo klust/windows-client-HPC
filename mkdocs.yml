@@ -54,7 +54,7 @@ nav:
     - openSUSE on WSL2: A_Management_tips/A_01_openSUSE.md
     - Fedora Remix on WSL2: A_Management_tips/A_02_Fedora_Remix.md
     - Ubuntu on WSL2: A_Management_tips/A_03_Ubuntu.md
-
+  - "App. B: Links": B_Links.md
 
 plugins:
   # show revision date at bottom of each page

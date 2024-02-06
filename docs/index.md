@@ -30,3 +30,4 @@
     -   [openSUSE](A_Management_tips/A_01_openSUSE.md)
     -   [Fedora Remix](A_Management_tips/A_02_Fedora_Remix.md)
     -   [Ubuntu](A_Management_tips/A_03_Ubuntu.md)
+-   [Appendix B: Links](B_Links.md)
