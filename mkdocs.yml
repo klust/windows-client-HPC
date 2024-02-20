@@ -49,7 +49,12 @@ nav:
     - Securing an X server in the Windows process space: 5_Issues/5_03_SecureX.md
     - Mapping users and groups between the Windows and WSL space: 5_Issues/5_04_Mapping_users.md
     - Upgrading Linux in WSL: 5_Issues/5_05_Upgrading_Linux.md
-
+  - "App. A: Management":
+    - A_Management_tips/index.md
+    - openSUSE on WSL2: A_Management_tips/A_01_openSUSE.md
+    - Fedora Remix on WSL2: A_Management_tips/A_02_Fedora_Remix.md
+    - Ubuntu on WSL2: A_Management_tips/A_03_Ubuntu.md
+  - "App. B: Links": B_Links.md
 
 plugins:
   # show revision date at bottom of each page

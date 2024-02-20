@@ -1,6 +1,6 @@
 # Using Windows as a client and development platform for HPC
 
--   [Introduction](0_00_introduction)
+-   [Introduction](0_00_introduction.md)
 -   [Protocols and technolgoeis](1_ProtocolsTechnologies/index.md)
     -   [SSH](1_ProtocolsTechnologies/1_01_SSH.md)
     -   [Remote graphics](1_ProtocolsTechnologies/1_02_Remote_graphics.md)
@@ -26,4 +26,8 @@
     -   [Securing an X server in the Windows process space](5_Issues/5_03_SecureX.md)
     -   [Mapping users and groups between the Windows and WSL space](5_Issues/5_04_Mapping_users.md)
     -   [Upgrading Linux in WSL](5_Issues/5_05_Upgrading_Linux.md)
-
+-   [Appendix A: Management tips](A_Management_tips/index.md)
+    -   [openSUSE](A_Management_tips/A_01_openSUSE.md)
+    -   [Fedora Remix](A_Management_tips/A_02_Fedora_Remix.md)
+    -   [Ubuntu](A_Management_tips/A_03_Ubuntu.md)
+-   [Appendix B: Links](B_Links.md)
