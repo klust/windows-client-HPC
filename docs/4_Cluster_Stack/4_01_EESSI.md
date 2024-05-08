@@ -28,7 +28,7 @@ distributions) does require an initial effort.
 
 ## Example: Setup on OpenSUSE in WSL2
 
-*Last update: 16 December 2023*
+*Last update: 4 May 2024*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 unfortunately does not contain instructions for SUSE Linux.
@@ -36,7 +36,7 @@ There are relevant files though in the [CVMFS repository @ CERN](https://ecsft.c
 In particular, look for the files in the newest `cvmfs-*` subdirectory and the
 `cvmfs-config` subdirectory.
 
-This setup is for openSUSE 15 (tested with 15.4) on WSL2 with systemd enabled so
+This setup is for openSUSE 15 (tested with 15.5) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 `cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
 
@@ -77,8 +77,18 @@ that the automounter can be used and so that it is no longer needed to call
 -   Similarly to what is done on Fedora in the official installation instructions, 
     install directly from this repository.
 
+    First check the version in a browser by checkint the `cvmfs-*` subdirectories at
+    [ecsft.cern.ch/dist/cvmfs](https://ecsft.cern.ch/dist/cvmfs).
+
+    Let's set the version in an environment variable:
+
     ``` bash
-    version='2.11.2'
+    version='2.11.3`
+    ```
+
+    So we can now install the necessary packages with:
+
+    ``` bash
     sudo zypper --no-gpg-checks install \
         https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-2.1-1.noarch.rpm \
         https://ecsft.cern.ch/dist/cvmfs/cvmfs-$version/cvmfs-$version-1.sle15.x86_64.rpm \
@@ -193,7 +203,7 @@ that the automounter can be used and so that it is no longer needed to call
     install directly from this repository.
 
     ``` bash
-    cvmfs_version='2.11.2'
+    cvmfs_version='2.11.3'
     fedora_version='38'
     config_version='2.1-1'
     $SUDO dnf --assumeyes install \
