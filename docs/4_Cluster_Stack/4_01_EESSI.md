@@ -270,7 +270,7 @@ that the automounter can be used and so that it is no longer needed to call
 
 ## Example: Setup on Ubuntu in WSL2
 
-*Last update: 19 December 2023*
+*Last update: 3 October 2024*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 does contain instructions for the Ubuntu Linux distribution. 
@@ -284,7 +284,7 @@ on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 `cvmfs_config wsl2_start` every time the Ubuntu distribution in WSL is restarted.
 
--   Ensure you have a Fedora Remix WSL2 setup with systemd running. We'll enable
+-   Ensure you have a Ubuntu WSL2 setup with systemd running. We'll enable
     autofs after installing EESSI as it may not yet be on the system but would
     be pulled in as a dependency of EESSI anyway.
 
@@ -296,7 +296,7 @@ that the automounter can be used and so that it is no longer needed to call
         systemd=true
         ```
 
-    -   Right now it is time to restart the Fedora Remix WSL2 distribution, e.g., 
+    -   Right now it is time to restart the Ubuntu WSL2 distribution, e.g., 
         from a normal bash command line:
 
         ``` bash
@@ -310,7 +310,7 @@ that the automounter can be used and so that it is no longer needed to call
         ```
 
 -   Following the [Debian/Ubuntu installation instructions](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux), 
-    frst add the CERN repositories to the repository list..
+    first add the CERN repositories to the repository list..
 
     ``` bash
     pushd /tmp
