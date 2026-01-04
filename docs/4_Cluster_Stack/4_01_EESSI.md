@@ -28,7 +28,7 @@ distributions) does require an initial effort.
 
 ## Example: Setup on OpenSUSE in WSL2
 
-*Last update: 4 May 2024*
+*Last thorough update: 4 May 2024*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 unfortunately does not contain instructions for SUSE Linux.
@@ -39,6 +39,9 @@ In particular, look for the files in the newest `cvmfs-*` subdirectory and the
 This setup is for openSUSE 15 (tested with 15.5) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 `cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
+**As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
+a different and newer version of OpenSSL for which no matching CVMFS binaries are
+distributed.**
 
 -   Ensure you have a openSUSE WSL2 setup with systemd running. We'll enable
     autofs after installing EESSI (as it is installed as a dependency of 
