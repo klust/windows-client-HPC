@@ -1323,7 +1323,7 @@ so the instructions below are the result of some experimenting als.</p>
 require installing additional software in most if not all WSL Linux
 distributions) does require an initial effort.</p>
 <h2 id="example-setup-on-opensuse-in-wsl2">Example: Setup on OpenSUSE in WSL2<a class="headerlink" href="#example-setup-on-opensuse-in-wsl2" title="Permanent link">&para;</a></h2>
-<p><em>Last update: 4 May 2024</em></p>
+<p><em>Last thorough update: 4 May 2024</em></p>
 <p>The <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html">"Getting Started" section of the CernVM-FS manual</a>
 unfortunately does not contain instructions for SUSE Linux.
 There are relevant files though in the <a href="https://ecsft.cern.ch/dist/cvmfs/">CVMFS repository @ CERN</a>.
@@ -1331,7 +1331,10 @@ In particular, look for the files in the newest <code>cvmfs-*</code> subdirector
 <code>cvmfs-config</code> subdirectory.</p>
 <p>This setup is for openSUSE 15 (tested with 15.5) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
-<code>cvmfs_config wsl2_start</code> every time the openSUSE distribution in WSL is restarted.</p>
+<code>cvmfs_config wsl2_start</code> every time the openSUSE distribution in WSL is restarted.
+<strong>As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
+a different and newer version of OpenSSL for which no matching CVMFS binaries are
+distributed.</strong></p>
 <ul>
 <li>
 <p>Ensure you have a openSUSE WSL2 setup with systemd running. We'll enable
@@ -1664,7 +1667,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">October 3, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 4, 2026</span>
   </span>
 
     
