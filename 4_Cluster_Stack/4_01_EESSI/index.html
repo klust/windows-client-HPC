@@ -1323,13 +1323,13 @@ so the instructions below are the result of some experimenting als.</p>
 require installing additional software in most if not all WSL Linux
 distributions) does require an initial effort.</p>
 <h2 id="example-setup-on-opensuse-in-wsl2">Example: Setup on OpenSUSE in WSL2<a class="headerlink" href="#example-setup-on-opensuse-in-wsl2" title="Permanent link">&para;</a></h2>
-<p><em>Last thorough update: 4 May 2024</em></p>
+<p><em>Last update: 5 January 2026</em></p>
 <p>The <a href="https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html">"Getting Started" section of the CernVM-FS manual</a>
 unfortunately does not contain instructions for SUSE Linux.
 There are relevant files though in the <a href="https://ecsft.cern.ch/dist/cvmfs/">CVMFS repository @ CERN</a>.
 In particular, look for the files in the newest <code>cvmfs-*</code> subdirectory and the
 <code>cvmfs-config</code> subdirectory.</p>
-<p>This setup is for openSUSE 15 (tested with 15.5) on WSL2 with systemd enabled so
+<p>This setup is for openSUSE 15 (tested with Leap 15.6) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 <code>cvmfs_config wsl2_start</code> every time the openSUSE distribution in WSL is restarted.
 <strong>As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
@@ -1372,13 +1372,14 @@ systemd=true
 <p>First check the version in a browser by checkint the <code>cvmfs-*</code> subdirectories at
 <a href="https://ecsft.cern.ch/dist/cvmfs">ecsft.cern.ch/dist/cvmfs</a>.</p>
 <p>Let's set the version in an environment variable:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">version</span><span class="o">=</span><span class="err">&#39;</span><span class="m">2</span>.11.3<span class="sb">`</span>
+<div class="highlight"><pre><span></span><code><span class="nv">version</span><span class="o">=</span><span class="err">&#39;</span><span class="m">2</span>.13.3<span class="sb">`</span>
 </code></pre></div>
 <p>So we can now install the necessary packages with:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>zypper<span class="w"> </span>--no-gpg-checks<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-2.1-1.noarch.rpm<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$version</span>/cvmfs-<span class="nv">$version</span>-1.sle15.x86_64.rpm<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$version</span>/cvmfs-libs-<span class="nv">$version</span>-1.sle15.x86_64.rpm
+<span class="w">    </span>https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/cvmfs-config-default-<span class="si">${</span><span class="nv">config_version</span><span class="si">}</span>.noarch.rpm<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-libs-<span class="si">${</span><span class="nv">cvmfs_version</span><span class="si">}</span>-1.sle15.x86_64.rpm<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-fuse3-<span class="si">${</span><span class="nv">cvmfs_version</span><span class="si">}</span>-1.sle15.x86_64.rpm<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-<span class="si">${</span><span class="nv">cvmfs_version</span><span class="si">}</span>-1.sle15.x86_64.rpm
 </code></pre></div>
 <p>(You'll have to check the version of <code>cvmfs-config-default</code> also, there is a <code>-latest</code> version
 but when checking this was actually a rather old file.)</p>
@@ -1667,7 +1668,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 4, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 5, 2026</span>
   </span>
 
     
