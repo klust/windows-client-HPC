@@ -28,7 +28,7 @@ distributions) does require an initial effort.
 
 ## Example: Setup on OpenSUSE in WSL2
 
-*Last thorough update: 4 May 2024*
+*Last update: 5 January 2026*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 unfortunately does not contain instructions for SUSE Linux.
@@ -36,7 +36,7 @@ There are relevant files though in the [CVMFS repository @ CERN](https://ecsft.c
 In particular, look for the files in the newest `cvmfs-*` subdirectory and the
 `cvmfs-config` subdirectory.
 
-This setup is for openSUSE 15 (tested with 15.5) on WSL2 with systemd enabled so
+This setup is for openSUSE 15 (tested with Leap 15.6) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 `cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
 **As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
@@ -86,16 +86,17 @@ distributed.**
     Let's set the version in an environment variable:
 
     ``` bash
-    version='2.11.3`
+    version='2.13.3`
     ```
 
     So we can now install the necessary packages with:
 
     ``` bash
     sudo zypper --no-gpg-checks install \
-        https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-2.1-1.noarch.rpm \
-        https://ecsft.cern.ch/dist/cvmfs/cvmfs-$version/cvmfs-$version-1.sle15.x86_64.rpm \
-        https://ecsft.cern.ch/dist/cvmfs/cvmfs-$version/cvmfs-libs-$version-1.sle15.x86_64.rpm
+        https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/cvmfs-config-default-${config_version}.noarch.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-libs-${cvmfs_version}-1.sle15.x86_64.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-fuse3-${cvmfs_version}-1.sle15.x86_64.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-${cvmfs_version}-1.sle15.x86_64.rpm
     ```
 
     (You'll have to check the version of `cvmfs-config-default` also, there is a `-latest` version
