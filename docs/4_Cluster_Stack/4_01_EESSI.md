@@ -158,12 +158,12 @@ distributed.**
 -   You can now make EESSI available in a shell with
 
     ```
-    source /cvmfs/software.eessi.io/versions/2023.06/init/bash
+    source /cvmfs/software.eessi.io/versions/2025.06/init/bash
     ```
 
-## Example: Setup on Fedora Remix in WSL2
+## Example: Setup on Fedora Remix or AlmaLinux in WSL2
 
-*Last update: 16 December 2023*
+*Last update: 19 January 2026*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 does contain instructions for the Fedora Linux distribution. However, there is no automatic
@@ -203,13 +203,24 @@ that the automounter can be used and so that it is no longer needed to call
         wsl --shutdown
         ```
 
--   Following the [Fedora installation instructions](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux), 
-    install directly from this repository.
+-   To install the latest version, follow the [instructions for Scientific Linux / RHEL / Alma or
+    Fedora (depending on your version, but ath the time of the last update of this text, those
+    instructions were the same for both) in the CernVM-FS documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux-officially-supported):
 
     ``` bash
-    cvmfs_version='2.11.3'
-    fedora_version='38'
-    config_version='2.1-1'
+    sudo yum install -y https://cvmrepo.s3.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
+    sudo yum install -y cvmfs
+    ```
+
+    This will not only install cvmfs, but also missing dependencies.
+
+    You can also install a specific version, but that only makes sense if you would somehow have information
+    that the latest version has issues. E.g., for Fedora 43:
+
+    ``` bash
+    cvmfs_version='2.13.3'
+    fedora_version='43'
+    config_version='2.2-1'
     $SUDO dnf --assumeyes install \
         https://ecsft.cern.ch/dist/cvmfs/cvmfs-$cvmfs_version/cvmfs-$cvmfs_version-1.fc$fedora_version.x86_64.rpm \
         https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-$config_version.noarch.rpm \
@@ -268,22 +279,22 @@ that the automounter can be used and so that it is no longer needed to call
 -   You can now make EESSI available in a shell with
 
     ```
-    source /cvmfs/software.eessi.io/versions/2023.06/init/bash
+    source /cvmfs/software.eessi.io/versions/2025.06/init/bash
     ```
 
 
 ## Example: Setup on Ubuntu in WSL2
 
-*Last update: 3 October 2024*
+*Last update: 19 January 2026*
 
 The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
 does contain instructions for the Ubuntu Linux distribution. 
-Contrary to Fedora and openSUSE, there is complete support for Ubuntu so the
-installation process is slightly different: Rather than downloading specific packages,
-the CERN repositories are added to the reposit list for Ubuntu and then the installation
+Ubuntu is fully supported and the installation process is also slightly different
+from the processes for SUSE or Red Hat based Linuxes:
+The CERN repositories are added to the repository list for Ubuntu and then the installation
 is done from there.
 
-This setup is was tested with Ubuntu 22.04
+This setup is was tested with Ubuntu 24.04.1
 on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
 `cvmfs_config wsl2_start` every time the Ubuntu distribution in WSL is restarted.
@@ -318,7 +329,7 @@ that the automounter can be used and so that it is no longer needed to call
 
     ``` bash
     pushd /tmp
-    wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+    wget https://cvmrepo.s3.cern.ch/cvmrepo/apt/cvmfs-release-latest_all.deb
     sudo dpkg -i cvmfs-release-latest_all.deb
     rm -f cvmfs-release-latest_all.deb
     popd
@@ -380,7 +391,7 @@ that the automounter can be used and so that it is no longer needed to call
 -   You can now make EESSI available in a shell with
 
     ```
-    source /cvmfs/software.eessi.io/versions/2023.06/init/bash
+    source /cvmfs/software.eessi.io/versions/2025.06/init/bash
     ```
 
 
