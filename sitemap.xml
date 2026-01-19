@@ -2,130 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://klust.github.io/windows-client-HPC/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/0_00_introduction/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/B_Links/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/1_ProtocolsTechnologies/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/1_ProtocolsTechnologies/1_01_SSH/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/1_ProtocolsTechnologies/1_02_Remote_graphics/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/1_ProtocolsTechnologies/1_03_Globus/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/2_LinuxOnWin/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/2_LinuxOnWin/2_01_WSL/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/2_LinuxOnWin/2_02_CygWin/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_01_allInOne/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_02_CLI_SSH/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_03_SFTP/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_04_SSHFS/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_05_Xserver/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_06_VNC/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/3_Software/3_07_NX/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_01_EESSI/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_02_EasyBuild/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/4_Cluster_Stack/4_03_Spack/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/5_01_SSH_key_management/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/5_02_Connecting_WinX/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/5_03_SecureX/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/5_04_Mapping_users/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/5_Issues/5_05_Upgrading_Linux/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/A_01_openSUSE/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/A_02_Fedora_Remix/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
     <url>
          <loc>https://klust.github.io/windows-client-HPC/A_Management_tips/A_03_Ubuntu/</loc>
-         <lastmod>2026-01-05</lastmod>
+         <lastmod>2026-01-19</lastmod>
     </url>
 </urlset>
