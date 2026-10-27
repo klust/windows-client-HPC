@@ -1650,7 +1650,7 @@ systemd=true
 <p>First check the version in a browser by checkint the <code>cvmfs-*</code> subdirectories at
 <a href="https://ecsft.cern.ch/dist/cvmfs">ecsft.cern.ch/dist/cvmfs</a>.</p>
 <p>Let's set the version in an environment variable:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">version</span><span class="o">=</span><span class="err">&#39;</span><span class="m">2</span>.13.3<span class="sb">`</span>
+<div class="highlight"><pre><span></span><code><span class="nv">version</span><span class="o">=</span><span class="err">'</span><span class="m">2</span>.13.3<span class="sb">`</span>
 </code></pre></div>
 <p>So we can now install the necessary packages with:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>zypper<span class="w"> </span>--no-gpg-checks<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
@@ -1671,14 +1671,14 @@ but when checking this was actually a rather old file.)</p>
 <p>Create (you'll have to run in a bash shell as root or run the editor using <code>sudo</code>) the file
     <code>/etc/cvmfs/default.local</code>. If you're experimenting on a workstation with no nearby cache 
     server for CernVM-FS, then the following would be appropriate:</p>
-<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE=&quot;single&quot;
-CVMFS_HTTP_PROXY=&quot;DIRECT&quot;
+<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE="single"
+CVMFS_HTTP_PROXY="DIRECT"
 CVMFS_QUOTA_LIMIT=10000
 </code></pre></div>
 <p>or with bash commands:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=10000&#39;       &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_CLIENT_PROFILE="</span>single<span class="s2">"'  &gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_HTTP_PROXY="</span>DIRECT<span class="s2">"'     &gt;&gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_QUOTA_LIMIT=10000'       &gt;&gt; /etc/cvmfs/default.local"</span>
 </code></pre></div>
 <p>Ensure everybody has read access to the file.</p>
 </li>
@@ -1690,7 +1690,7 @@ sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </spa
 <li>
 <p>Now edit <code>/etc/auto.master</code> and uncomment the line
     <code>#+dir:/etc/auto.master.d/</code>. E.g.,</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%&#39;</span><span class="w"> </span>/etc/auto.master
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'s%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%'</span><span class="w"> </span>/etc/auto.master
 </code></pre></div>
 </li>
 <li>
@@ -1759,9 +1759,9 @@ sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> <
 <p>This will not only install cvmfs, but also missing dependencies.</p>
 <p>You can also install a specific version, but that only makes sense if you would somehow have information
 that the latest version has issues. E.g., for Fedora 43:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">cvmfs_version</span><span class="o">=</span><span class="s1">&#39;2.13.3&#39;</span>
-<span class="nv">fedora_version</span><span class="o">=</span><span class="s1">&#39;43&#39;</span>
-<span class="nv">config_version</span><span class="o">=</span><span class="s1">&#39;2.2-1&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="nv">cvmfs_version</span><span class="o">=</span><span class="s1">'2.13.3'</span>
+<span class="nv">fedora_version</span><span class="o">=</span><span class="s1">'43'</span>
+<span class="nv">config_version</span><span class="o">=</span><span class="s1">'2.2-1'</span>
 <span class="nv">$SUDO</span><span class="w"> </span>dnf<span class="w"> </span>--assumeyes<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$cvmfs_version</span>/cvmfs-<span class="nv">$cvmfs_version</span>-1.fc<span class="nv">$fedora_version</span>.x86_64.rpm<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-<span class="nv">$config_version</span>.noarch.rpm<span class="w"> </span><span class="se">\</span>
@@ -1779,14 +1779,14 @@ but when checking this was actually a rather old file.)</p>
 <p>Create (you'll have to run in a bash shell as root or run the editor using <code>sudo</code>) the file
     <code>/etc/cvmfs/default.local</code>. If you're experimenting on a workstation with no nearby cache 
     server for CernVM-FS, then the following would be appropriate:</p>
-<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE=&quot;single&quot;
-CVMFS_HTTP_PROXY=&quot;DIRECT&quot;
+<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE="single"
+CVMFS_HTTP_PROXY="DIRECT"
 CVMFS_QUOTA_LIMIT=10000
 </code></pre></div>
 <p>or with bash commands:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=10000&#39;       &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_CLIENT_PROFILE="</span>single<span class="s2">"'  &gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_HTTP_PROXY="</span>DIRECT<span class="s2">"'     &gt;&gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_QUOTA_LIMIT=10000'       &gt;&gt; /etc/cvmfs/default.local"</span>
 </code></pre></div>
 <p>Ensure everybody has read access to the file.</p>
 </li>
@@ -1875,14 +1875,14 @@ sudo<span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="
 <p>Create (you'll have to run in a bash shell as root or run the editor using <code>sudo</code>) the file
     <code>/etc/cvmfs/default.local</code>. If you're experimenting on a workstation with no nearby cache 
     server for CernVM-FS, then the following would be appropriate:</p>
-<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE=&quot;single&quot;
-CVMFS_HTTP_PROXY=&quot;DIRECT&quot;
+<div class="highlight"><pre><span></span><code>CVMFS_CLIENT_PROFILE="single"
+CVMFS_HTTP_PROXY="DIRECT"
 CVMFS_QUOTA_LIMIT=10000
 </code></pre></div>
 <p>or with bash commands:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=10000&#39;       &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_CLIENT_PROFILE="</span>single<span class="s2">"'  &gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_HTTP_PROXY="</span>DIRECT<span class="s2">"'     &gt;&gt; /etc/cvmfs/default.local"</span>
+sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_QUOTA_LIMIT=10000'       &gt;&gt; /etc/cvmfs/default.local"</span>
 </code></pre></div>
 <p>Ensure everybody has read access to the file.</p>
 </li>

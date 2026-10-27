@@ -1555,38 +1555,38 @@ and <a href="https://www.eessi.io/docs/">EESSI documentation</a>.</p>
 <span class="c1"># Make the next one an empty variable if instead you prefer to run</span>
 <span class="c1"># the whole script in sudo mode. You then however also need to</span>
 <span class="c1"># change set the userid that should be edited in edituser</span>
-<span class="nv">SUDO</span><span class="o">=</span><span class="s1">&#39;sudo&#39;</span>
-<span class="nv">edituser</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span>
+<span class="nv">SUDO</span><span class="o">=</span><span class="s1">'sudo'</span>
+<span class="nv">edituser</span><span class="o">=</span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>
 
 <span class="c1"># Upgrade the already installed packages</span>
 <span class="nv">$SUDO</span><span class="w"> </span>dnf<span class="w"> </span>--assumeyes<span class="w"> </span>update
 
 <span class="c1"># Ensure systemd is always used, independent of the options chosen</span>
 <span class="c1"># when starting the first Fedora Remix session.</span>
-<span class="c1"># If you are running without systemd, you&#39;ll have to restart which</span>
+<span class="c1"># If you are running without systemd, you'll have to restart which</span>
 <span class="c1"># is done at the end of the script.</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo -e &#39;\n[boot]\nsystemd=true&#39; &gt;&gt;/etc/wsl.conf&quot;</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo -e '\n[boot]\nsystemd=true' &gt;&gt;/etc/wsl.conf"</span>
 
 <span class="c1"># Set the home directory of my account to the one on Windows</span>
-<span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;s|/home/</span><span class="nv">$edituser</span><span class="s2">|/mnt/c/Users/</span><span class="nv">$edituser</span><span class="s2">|&quot;</span><span class="w"> </span>/etc/passwd
+<span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">"s|/home/</span><span class="nv">$edituser</span><span class="s2">|/mnt/c/Users/</span><span class="nv">$edituser</span><span class="s2">|"</span><span class="w"> </span>/etc/passwd
 
 <span class="c1">#</span>
 <span class="c1"># Setting up EESSI</span>
 <span class="c1">#</span>
 <span class="c1"># Note that this will actually pull in the autofs service as a dependency</span>
 <span class="c1">#</span>
-<span class="nv">cvmfs_version</span><span class="o">=</span><span class="s1">&#39;2.11.2&#39;</span>
-<span class="nv">fedora_version</span><span class="o">=</span><span class="s1">&#39;38&#39;</span>
-<span class="nv">config_version</span><span class="o">=</span><span class="s1">&#39;2.1-1&#39;</span>
+<span class="nv">cvmfs_version</span><span class="o">=</span><span class="s1">'2.11.2'</span>
+<span class="nv">fedora_version</span><span class="o">=</span><span class="s1">'38'</span>
+<span class="nv">config_version</span><span class="o">=</span><span class="s1">'2.1-1'</span>
 <span class="nv">$SUDO</span><span class="w"> </span>dnf<span class="w"> </span>--assumeyes<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$cvmfs_version</span>/cvmfs-<span class="nv">$cvmfs_version</span>-1.fc<span class="nv">$fedora_version</span>.x86_64.rpm<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-config/cvmfs-config-default-<span class="nv">$config_version</span>.noarch.rpm<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>https://ecsft.cern.ch/dist/cvmfs/cvmfs-<span class="nv">$cvmfs_version</span>/cvmfs-libs-<span class="nv">$cvmfs_version</span>-1.fc<span class="nv">$fedora_version</span>.x86_64.rpm
 
 <span class="c1"># Create /etc/cvmfs/default.local</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=2500&#39;        &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_CLIENT_PROFILE="</span>single<span class="s2">"'  &gt; /etc/cvmfs/default.local"</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_HTTP_PROXY="</span>DIRECT<span class="s2">"'     &gt;&gt; /etc/cvmfs/default.local"</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_QUOTA_LIMIT=2500'        &gt;&gt; /etc/cvmfs/default.local"</span>
 
 <span class="c1"># Run the setup</span>
 <span class="nv">$SUDO</span><span class="w"> </span>cvmfs_config<span class="w"> </span>setup
@@ -1620,10 +1620,10 @@ and <a href="https://www.eessi.io/docs/">EESSI documentation</a>.</p>
 
 <span class="c1"># Give a message about the needed restart to ensure all settings take</span>
 <span class="c1"># effect.</span>
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Now reboot WSL2 or at least this distribution to enable systemd, e.g.,&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nwsl.exe --shutdown&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nor more selectively and from the Fedora shell&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\n/mnt/c/Windows/system32/wsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"Now reboot WSL2 or at least this distribution to enable systemd, e.g.,"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\nwsl.exe --shutdown"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\nor more selectively and from the Fedora shell"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\n/mnt/c/Windows/system32/wsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">"</span>
 </code></pre></div>
 There are ways to enable systemd globally for all distributions but that option turned
 out to be rather dangerous as some distributions, including openSUSE Leap 15.4 which I

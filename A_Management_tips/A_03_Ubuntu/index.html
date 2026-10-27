@@ -1557,8 +1557,8 @@ and <a href="https://www.eessi.io/docs/">EESSI documentation</a>.</p>
 <span class="c1"># Make the next one an empty variable if instead you prefer to run</span>
 <span class="c1"># the whole script in sudo mode. You then however also need to</span>
 <span class="c1"># change set the userid that should be edited in edituser</span>
-<span class="nv">SUDO</span><span class="o">=</span><span class="s1">&#39;sudo&#39;</span>
-<span class="nv">edituser</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$USER</span><span class="s2">&quot;</span>
+<span class="nv">SUDO</span><span class="o">=</span><span class="s1">'sudo'</span>
+<span class="nv">edituser</span><span class="o">=</span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>
 
 <span class="c1"># Update the package list and then do a full upgrade of the default packages</span>
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>update
@@ -1566,12 +1566,12 @@ and <a href="https://www.eessi.io/docs/">EESSI documentation</a>.</p>
 
 <span class="c1"># Ensure systemd is always used, independent of the options chosen</span>
 <span class="c1"># when starting the first Ubuntu session.</span>
-<span class="c1"># If you are running without systemd, you&#39;ll have to restart which</span>
+<span class="c1"># If you are running without systemd, you'll have to restart which</span>
 <span class="c1"># is done at the end of the script.</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo -e &#39;\n[boot]\nsystemd=true&#39; &gt;&gt;/etc/wsl.conf&quot;</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo -e '\n[boot]\nsystemd=true' &gt;&gt;/etc/wsl.conf"</span>
 
 <span class="c1"># Set the home directory of my account to the one on Windows</span>
-<span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;s|/home/</span><span class="nv">$edituser</span><span class="s2">|/mnt/c/Users/</span><span class="nv">$edituser</span><span class="s2">|&quot;</span><span class="w"> </span>/etc/passwd
+<span class="nv">$SUDO</span><span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">"s|/home/</span><span class="nv">$edituser</span><span class="s2">|/mnt/c/Users/</span><span class="nv">$edituser</span><span class="s2">|"</span><span class="w"> </span>/etc/passwd
 
 <span class="c1">#</span>
 <span class="c1"># Setting up EESSI</span>
@@ -1591,18 +1591,18 @@ rm<span class="w"> </span>-f<span class="w"> </span>cvmfs-release-latest_all.deb
 
 <span class="c1">#</span>
 <span class="c1"># Now install cvmfs</span>
-<span class="c1"># But don&#39;t forget to first pull in data from the repos that we have</span>
+<span class="c1"># But don't forget to first pull in data from the repos that we have</span>
 <span class="c1"># added in the previous step.</span>
 <span class="c1">#</span>
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>update
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>cvmfs
 <span class="c1"># Note: I did get an error while processing openssh-server.</span>
-<span class="c1"># This doesn&#39;t seem to be needed though.</span>
+<span class="c1"># This doesn't seem to be needed though.</span>
 
 <span class="c1"># Create /etc/cvmfs/default.local</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_CLIENT_PROFILE=&quot;</span>single<span class="s2">&quot;&#39;  &gt; /etc/cvmfs/default.local&quot;</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_HTTP_PROXY=&quot;</span>DIRECT<span class="s2">&quot;&#39;     &gt;&gt; /etc/cvmfs/default.local&quot;</span>
-<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;echo &#39;CVMFS_QUOTA_LIMIT=2500&#39;        &gt;&gt; /etc/cvmfs/default.local&quot;</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_CLIENT_PROFILE="</span>single<span class="s2">"'  &gt; /etc/cvmfs/default.local"</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_HTTP_PROXY="</span>DIRECT<span class="s2">"'     &gt;&gt; /etc/cvmfs/default.local"</span>
+<span class="nv">$SUDO</span><span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"echo 'CVMFS_QUOTA_LIMIT=2500'        &gt;&gt; /etc/cvmfs/default.local"</span>
 
 <span class="c1"># Run the setup</span>
 <span class="nv">$SUDO</span><span class="w"> </span>cvmfs_config<span class="w"> </span>setup
@@ -1619,7 +1619,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>cvmfs-release-latest_all.deb
 <span class="c1">#</span>
 
 <span class="c1">#</span>
-<span class="c1"># I don&#39;t want an ssh server running for now</span>
+<span class="c1"># I don't want an ssh server running for now</span>
 <span class="c1">#</span>
 <span class="nv">$SUDO</span><span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>ssh.service
 
@@ -1634,7 +1634,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>cvmfs-release-latest_all.deb
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>git
 
 <span class="c1"># Need Python 3.11 (the distribution I tested on took 3.8 as the default).</span>
-<span class="c1"># Wee needed to install it from &quot;deadsnakes PPA&quot;</span>
+<span class="c1"># Wee needed to install it from "deadsnakes PPA"</span>
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>software-properties-common<span class="w"> </span>-y
 <span class="nv">$SUDO</span><span class="w"> </span>add-apt-repository<span class="w"> </span>--yes<span class="w"> </span>--update<span class="w"> </span>ppa:deadsnakes/ppa
 <span class="nv">$SUDO</span><span class="w"> </span>apt<span class="w"> </span>--assume-yes<span class="w"> </span>install<span class="w"> </span>python3.11
@@ -1647,10 +1647,10 @@ rm<span class="w"> </span>-f<span class="w"> </span>cvmfs-release-latest_all.deb
 
 <span class="c1"># Give a message about the needed restart to ensure all settings take</span>
 <span class="c1"># effect.</span>
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;Now reboot WSL2 or at least this distribution to enable systemd, e.g.,&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nwsl.exe --shutdown&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nor more selectively and from the Ubuntu shell&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="s2">&quot;\nwsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"Now reboot WSL2 or at least this distribution to enable systemd, e.g.,"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\nwsl.exe --shutdown"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\nor more selectively and from the Ubuntu shell"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="s2">"\nwsl.exe --terminate </span><span class="nv">$WSL_DISTRO_NAME</span><span class="s2">"</span>
 </code></pre></div>
 <p>There are ways to enable systemd globally for all distributions but that option turned
 out to be rather dangerous as some distributions, including openSUSE Leap 15.4 which I

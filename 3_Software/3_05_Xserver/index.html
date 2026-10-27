@@ -1544,7 +1544,7 @@ university network.</p>
     to start Xming with access control disabled (using the -ac command
     line option) and set the DISPLAY environment variable in your WSL2
     session with </p>
-<div class="highlight"><pre><span></span><code>export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk &#39;{print \$2; exit;}&#39;):0 
+<div class="highlight"><pre><span></span><code>export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print \$2; exit;}'):0 
 </code></pre></div>
 <p>which is a trick that
 works with the other X servers also.</p>
