@@ -26,45 +26,35 @@ require installing additional software in most if not all WSL Linux
 distributions) does require an initial effort.
 
 
-## Example: Setup on OpenSUSE in WSL2
+## Example: Setup on Ubuntu in WSL2
 
-*Last update: 5 January 2026*
+*Last update: 29 October 2026*
 
-The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
-unfortunately does not contain instructions for SUSE Linux.
-There are relevant files though in the [CVMFS repository @ CERN](https://ecsft.cern.ch/dist/cvmfs/).
-In particular, look for the files in the newest `cvmfs-*` subdirectory and the
-`cvmfs-config` subdirectory.
+The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/)
+does contain instructions for the Ubuntu Linux distribution. 
+Ubuntu is fully supported and the installation process is also slightly different
+from the processes for SUSE or Red Hat based Linuxes:
+The CERN repositories are added to the repository list for Ubuntu and then the installation
+is done from there.
 
-This setup is for openSUSE 15 (tested with Leap 15.6) on WSL2 with systemd enabled so
+This setup is was tested with Ubuntu 24.04 and 26.04
+on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
-`cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
-**As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
-a different and newer version of OpenSSL for which no matching CVMFS binaries are
-distributed.**
+`cvmfs_config wsl2_start` every time the Ubuntu distribution in WSL is restarted.
 
--   Ensure you have a openSUSE WSL2 setup with systemd running. We'll enable
-    autofs after installing EESSI (as it is installed as a dependency of 
-    EESSI if it has not yet been installed for other reasons).
-
-    -   Ensure that the `wsl_systemd` pattern is installed to fully enable systemd:
-
-        ``` bash
-        sudo zypper install -n -t pattern wsl_systemd
-        ```
-
-        There are [other useful patterns](https://en.opensuse.org/openSUSE:WSL)
-        also and they do not always play nice with updating `/etc/wsl.conf`...
+-   Ensure you have a Ubuntu WSL2 setup with systemd running. We'll enable
+    autofs after installing EESSI as it may not yet be on the system but would
+    be pulled in as a dependency of EESSI anyway.
 
     -   Ensure that `/etc/wsl.conf` exists and that the `[boot]` section contains the 
-        line `systemd=true`. The minimal such file would be
+        line `systemd=true`. The minimal `[boot]` section of this file would be
 
         ``` text
         [boot]
         systemd=true
         ```
 
-    -   Right now it is time to restart the openSUSE WSL2 distribution, e.g., 
+    -   Right now it is time to restart the Ubuntu WSL2 distribution, e.g., 
         from a normal bash command line:
 
         ``` bash
@@ -77,30 +67,23 @@ distributed.**
         wsl --shutdown
         ```
 
--   Similarly to what is done on Fedora in the official installation instructions, 
-    install directly from this repository.
-
-    First check the version in a browser by checkint the `cvmfs-*` subdirectories at
-    [ecsft.cern.ch/dist/cvmfs](https://ecsft.cern.ch/dist/cvmfs).
-
-    Let's set the version in an environment variable:
+-   Following the [Debian/Ubuntu installation instructions](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/#linux-officially-supported), 
+    first add the CERN repositories to the repository list..
 
     ``` bash
-    version='2.13.3`
+    pushd /tmp
+    wget https://cvmrepo.s3.cern.ch/cvmrepo/apt/cvmfs-release-latest_all.deb
+    sudo dpkg -i cvmfs-release-latest_all.deb
+    rm -f cvmfs-release-latest_all.deb
+    popd
     ```
 
-    So we can now install the necessary packages with:
+-   Next we actually install CernVM-FS:
 
     ``` bash
-    sudo zypper --no-gpg-checks install \
-        https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/cvmfs-config-default-${config_version}.noarch.rpm \
-        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-libs-${cvmfs_version}-1.sle15.x86_64.rpm \
-        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-fuse3-${cvmfs_version}-1.sle15.x86_64.rpm \
-        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-${cvmfs_version}-1.sle15.x86_64.rpm
+    sudo apt update
+    sudo apt --assume-yes install cvmfs
     ```
-
-    (You'll have to check the version of `cvmfs-config-default` also, there is a `-latest` version
-    but when checking this was actually a rather old file.)
 
 -   Note that it is no longer needed to install the EESSI configuration file for CernVM-FS
     (`cvmfs-config-eessi-latest.noarch.rpm`) as the new EESSI repository is included in
@@ -132,13 +115,6 @@ distributed.**
     sudo cvmfs_config setup
     ```
 
--   Now edit `/etc/auto.master` and uncomment the line
-    `#+dir:/etc/auto.master.d/`. E.g.,
-
-    ``` bash
-    sudo sed -i 's%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%' /etc/auto.master
-    ```
-
 -   Enable and start the autofs service:
 
     ``` bash
@@ -161,11 +137,12 @@ distributed.**
     source /cvmfs/software.eessi.io/versions/2025.06/init/bash
     ```
 
+
 ## Example: Setup on Fedora Remix or AlmaLinux in WSL2
 
-*Last update: 19 January 2026*
+*Last update: 29 October 2026*
 
-The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
+The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/)
 does contain instructions for the Fedora Linux distribution. However, there is no automatic
 updating of versions and one has to look for the available versions in 
 in the [CVMFS repository @ CERN](https://ecsft.cern.ch/dist/cvmfs/).
@@ -205,7 +182,7 @@ that the automounter can be used and so that it is no longer needed to call
 
 -   To install the latest version, follow the [instructions for Scientific Linux / RHEL / Alma or
     Fedora (depending on your version, but ath the time of the last update of this text, those
-    instructions were the same for both) in the CernVM-FS documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux-officially-supported):
+    instructions were the same for both) in the CernVM-FS documentation](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/#linux-officially-supported):
 
     ``` bash
     sudo yum install -y https://cvmrepo.s3.cern.ch/cvmrepo/yum/cvmfs-release-latest.noarch.rpm
@@ -283,35 +260,45 @@ that the automounter can be used and so that it is no longer needed to call
     ```
 
 
-## Example: Setup on Ubuntu in WSL2
+## Example: Setup on OpenSUSE in WSL2
 
-*Last update: 19 January 2026*
+*Last update: 29 October 2026*
 
-The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
-does contain instructions for the Ubuntu Linux distribution. 
-Ubuntu is fully supported and the installation process is also slightly different
-from the processes for SUSE or Red Hat based Linuxes:
-The CERN repositories are added to the repository list for Ubuntu and then the installation
-is done from there.
+The ["Getting Started" section of the CernVM-FS manual](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart/)
+unfortunately does not contain instructions for SUSE Linux.
+There are relevant files though in the [CVMFS repository @ CERN](https://ecsft.cern.ch/dist/cvmfs/).
+In particular, look for the files in the newest `cvmfs-*` subdirectory and the
+`cvmfs-config` subdirectory.
 
-This setup is was tested with Ubuntu 24.04.1
-on WSL2 with systemd enabled so
+This setup is for openSUSE 15 (tested with Leap 15.6) on WSL2 with systemd enabled so
 that the automounter can be used and so that it is no longer needed to call
-`cvmfs_config wsl2_start` every time the Ubuntu distribution in WSL is restarted.
+`cvmfs_config wsl2_start` every time the openSUSE distribution in WSL is restarted.
+**As of January 2026, the instructions do not yet work on SUSE 16 or Tumbleweed as those use
+a different and newer version of OpenSSL for which no matching CVMFS binaries are
+distributed.**
 
--   Ensure you have a Ubuntu WSL2 setup with systemd running. We'll enable
-    autofs after installing EESSI as it may not yet be on the system but would
-    be pulled in as a dependency of EESSI anyway.
+-   Ensure you have a openSUSE WSL2 setup with systemd running. We'll enable
+    autofs after installing EESSI (as it is installed as a dependency of 
+    EESSI if it has not yet been installed for other reasons).
+
+    -   Ensure that the `wsl_systemd` pattern is installed to fully enable systemd:
+
+        ``` bash
+        sudo zypper install -n -t pattern wsl_systemd
+        ```
+
+        There are [other useful patterns](https://en.opensuse.org/openSUSE:WSL)
+        also and they do not always play nice with updating `/etc/wsl.conf`...
 
     -   Ensure that `/etc/wsl.conf` exists and that the `[boot]` section contains the 
-        line `systemd=true`. The minimal `[boot]` section of this file would be
+        line `systemd=true`. The minimal such file would be
 
         ``` text
         [boot]
         systemd=true
         ```
 
-    -   Right now it is time to restart the Ubuntu WSL2 distribution, e.g., 
+    -   Right now it is time to restart the openSUSE WSL2 distribution, e.g., 
         from a normal bash command line:
 
         ``` bash
@@ -324,23 +311,39 @@ that the automounter can be used and so that it is no longer needed to call
         wsl --shutdown
         ```
 
--   Following the [Debian/Ubuntu installation instructions](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html#linux), 
-    first add the CERN repositories to the repository list..
+-   Similarly to what is done on Fedora in the official installation instructions, 
+    install directly from this repository.
+
+    First check the version in a browser by checkint the `cvmfs-*` subdirectories at
+    [ecsft.cern.ch/dist/cvmfs](https://ecsft.cern.ch/dist/cvmfs).
+
+    Let's set the version in an environment variable:
 
     ``` bash
-    pushd /tmp
-    wget https://cvmrepo.s3.cern.ch/cvmrepo/apt/cvmfs-release-latest_all.deb
-    sudo dpkg -i cvmfs-release-latest_all.deb
-    rm -f cvmfs-release-latest_all.deb
-    popd
+    cvmfs_version='2.13.3`
     ```
 
--   Next we actually install CernVM-FS:
+    Next, check the version of the latest `cvmfs-config-default` in
+    [cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/](https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/).
+
+    Again set this version in an environment variable:
 
     ``` bash
-    sudo apt update
-    sudo apt --assume-yes install cvmfs
+    config_version='2.2.1'
     ```
+
+    So we can now install the necessary packages with:
+
+    ``` bash
+    sudo zypper --no-gpg-checks install \
+        https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/cvmfs-config-default-${config_version}.noarch.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-libs-${cvmfs_version}-1.sle15.x86_64.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-fuse3-${cvmfs_version}-1.sle15.x86_64.rpm \
+        https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/15/x86_64/cvmfs-${cvmfs_version}-1.sle15.x86_64.rpm
+    ```
+
+    (You'll have to check the version of `cvmfs-config-default` also, there is a `-latest` version
+    but when checking this was actually a rather old file.)
 
 -   Note that it is no longer needed to install the EESSI configuration file for CernVM-FS
     (`cvmfs-config-eessi-latest.noarch.rpm`) as the new EESSI repository is included in
@@ -372,6 +375,15 @@ that the automounter can be used and so that it is no longer needed to call
     sudo cvmfs_config setup
     ```
 
+    and ignore the warnings.
+
+-   Now edit `/etc/auto.master` and uncomment the line
+    `#+dir:/etc/auto.master.d/`. E.g.,
+
+    ``` bash
+    sudo sed -i 's%#+dir:/etc/auto.master.d%+dir:/etc/auto.master.d%' /etc/auto.master
+    ```
+
 -   Enable and start the autofs service:
 
     ``` bash
@@ -393,6 +405,47 @@ that the automounter can be used and so that it is no longer needed to call
     ```
     source /cvmfs/software.eessi.io/versions/2025.06/init/bash
     ```
+
+Note that the instructions on [the "Getting Started" page](https://cvmfs.readthedocs.io/en/stable/cpt-quickstart.html)
+suggest a different and easier procedure to install and automatically update the necessary CernVM-FS packages,
+but when we tested in October 2026, this procedure didn't work and 
+`cvmfs-release-latest.noarch.rpm` seemed broken. A variable in there expanded to the wrong version, leading
+to an illegal repo name that it tried to install, which was refused.
+
+We've also tried the above procedure with OpenSUSE Tumbleweed, which is based on SUSE 16. The procedure is very similar,
+but there is an issue with the `libfuse3` package. The installation expects `libfuse3-3` which is not available in 
+OpenSUSE Tumbleweed. That distribution offers `libfuse3-4` instead. You can install this manually first and then
+install other packages:
+
+Testing with
+
+``` bash
+cvmfs_version='2.14.1'
+config_version='2.2-1'
+```
+
+and running
+
+``` bash
+sudo zypper --non-interactive install libfuse3-4
+sudo zypper --no-gpg-checks install \
+    https://cvmrepo.web.cern.ch/cvmrepo/cvmfs-config/cvmfs-config-default-${config_version}.noarch.rpm \
+    https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/16/x86_64/cvmfs-fuse3-${cvmfs_version}-1.sle16.x86_64.rpm \
+    https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/16/x86_64/cvmfs-${cvmfs_version}-1.sle16.x86_64.rpm \
+    https://cvmrepo.web.cern.ch/cvmrepo/yum/cvmfs/suse/16/x86_64/cvmfs-libs-${cvmfs_version}-1.sle16.x86_64.rpm
+```
+
+You'll have to accept a potentially broken procedure in the second command.
+
+The automounter was also not installed by default in OpenSUSE Tumbleweed when we tested. This can be done with
+
+``` bash
+sudo zypper --non-interactive install autofs
+```
+
+before installing CernVM-FS.
+
+Further experience is needed to see if everything works correctly on OpenSUSE Tumbleweed.
 
 
 ## Useful links
